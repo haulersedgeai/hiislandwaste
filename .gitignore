@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local research / scrape (not deployed)
+/_research/
+/research-notes.md
+/.vercel
