@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.hiislandwaste.com
+
+# Sitemaps
+Sitemap: https://www.hiislandwaste.com/sitemap.xml
