@@ -179,6 +179,7 @@ export function LocationCard({ location }: { location: Location }) {
 }
 
 export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
+  const sourceLabel = testimonial.source === "google" ? "via Google" : "via Yelp";
   return (
     <Card className="h-full bg-white">
       <CardContent className="pt-6">
@@ -188,15 +189,22 @@ export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
           ))}
         </div>
         <Quote className="size-5 text-(--color-sand-400) mb-2" />
-        <p className="font-display font-bold text-lg text-(--color-ocean-800) leading-snug">
-          "{testimonial.shortQuote}"
-        </p>
+        {testimonial.shortQuote && (
+          <p className="font-display font-bold text-lg text-(--color-ocean-800) leading-snug">
+            "{testimonial.shortQuote}"
+          </p>
+        )}
         <p className="mt-3 text-(--color-ocean-700)/80 leading-relaxed text-sm">
-          {testimonial.quote}
+          {testimonial.body}
         </p>
         <div className="mt-4 pt-4 border-t border-(--color-sand-200)">
           <p className="font-bold text-(--color-ocean-800) text-sm">{testimonial.name}</p>
-          <p className="text-xs text-(--color-ocean-700)/70">{testimonial.location}{testimonial.service ? ` · ${testimonial.service}` : ""}</p>
+          <p className="text-xs text-(--color-ocean-700)/70">
+            {testimonial.location}{testimonial.project ? ` · ${testimonial.project}` : ""}
+          </p>
+          <p className="mt-1 text-[11px] uppercase tracking-wider text-(--color-ocean-700)/55">
+            {sourceLabel}
+          </p>
         </div>
       </CardContent>
     </Card>

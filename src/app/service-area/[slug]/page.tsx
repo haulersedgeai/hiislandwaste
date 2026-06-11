@@ -8,7 +8,7 @@ import { PageHero, CTASection, LocationCard, ServiceCard, TestimonialCard } from
 import { QuoteForm } from "@/components/site/quote-form";
 import { locations, regions, getLocation, FACILITY_DETAILS, type Region, type Location } from "@/content/locations";
 import { serviceHubs } from "@/content/services";
-import { testimonials } from "@/content/testimonials";
+import { getTestimonialsForLocation } from "@/content/testimonials";
 import { site } from "@/lib/site";
 import { JsonLd } from "@/components/schema/JsonLd";
 import { breadcrumbSchema, locationServiceSchema } from "@/lib/schema";
@@ -138,6 +138,7 @@ function LocationView({ slug }: { slug: string }) {
   const loc = getLocation(slug)!;
   const r = regions[loc.region];
   const sameRegion = locations.filter((l) => l.region === loc.region && l.slug !== loc.slug).slice(0, 8);
+  const locationTestimonials = getTestimonialsForLocation(loc.slug).slice(0, 2);
 
   return (
     <>
@@ -285,7 +286,9 @@ function LocationView({ slug }: { slug: string }) {
                   </div>
                 </CardContent>
               </Card>
-              <TestimonialCard testimonial={testimonials[0]} />
+              {locationTestimonials.map((t) => (
+                <TestimonialCard key={t.name} testimonial={t} />
+              ))}
             </div>
           </aside>
         </div>

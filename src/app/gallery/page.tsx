@@ -15,8 +15,8 @@ const GALLERY: GalleryItem[] = [
   // Real before/after pairs (lead with the storytelling photos)
   { src: "/images/before-after/shed-overgrown-before.jpg", alt: "Overgrown Hilo property with rusted shed and scattered debris before Hawaii Island Waste cleanout" },
   { src: "/images/before-after/shed-cleared-after.jpg", alt: "Same Hilo property after Hawaii Island Waste cleared the brush and debris, exposing the shed and graded ground" },
-  { src: "/images/before-after/yard-tarp-debris-before.jpg", alt: "Yard piled with construction debris under a green tarp before Hawaii Island Waste cleanup" },
-  { src: "/images/before-after/yard-tarp-debris-after.jpg", alt: "Same yard cleared of debris by Hawaii Island Waste, ground exposed under the tarp" },
+  { src: "/images/before-after/yard-tarp-debris-after.jpg", alt: "Yard piled with construction debris under a green tarp before Hawaii Island Waste cleanup" },
+  { src: "/images/before-after/yard-tarp-debris-before.jpg", alt: "Same yard cleared of debris by Hawaii Island Waste, ready for landscape" },
   { src: "/images/before-after/yard-driveway-cleared.jpg", alt: "Cleared driveway and landscaped yard after a Hawaii Island Waste cleanout, palms and concrete drive visible" },
   { src: "/images/before-after/room-cleanout-split.jpg", alt: "Before/after split image — room cluttered with boxes and debris cleared to a bright empty space by Hawaii Island Waste" },
   { src: "/images/before-after/patio-cleanup-before.jpg", alt: "Hilo backyard patio with bagged debris and brush piled around the table before cleanout" },

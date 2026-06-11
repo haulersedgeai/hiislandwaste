@@ -1,6 +1,23 @@
 import { site } from "@/lib/site";
 import { locations } from "@/content/locations";
-import { testimonials } from "@/content/testimonials";
+import {
+  testimonials,
+  REVIEW_AVERAGE,
+  TOTAL_REVIEW_COUNT,
+} from "@/content/testimonials";
+
+const JSON_LD_REVIEW_NAMES = [
+  "Valerie V.",
+  "Donn U.",
+  "Stephen Mika'ele LB",
+  "Rusty Crabbe",
+  "Stephanie Goya",
+  "Andrew Yanagi",
+];
+
+const jsonLdReviews = JSON_LD_REVIEW_NAMES
+  .map((n) => testimonials.find((t) => t.name === n))
+  .filter((t): t is NonNullable<typeof t> => Boolean(t));
 
 export function LocalBusinessJsonLd() {
   const data = {
@@ -44,16 +61,16 @@ export function LocalBusinessJsonLd() {
     sameAs: [site.social.instagram],
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: site.aggregateRating.value,
-      reviewCount: site.aggregateRating.count,
-      bestRating: 5,
-      worstRating: 1,
+      ratingValue: REVIEW_AVERAGE.toFixed(1),
+      reviewCount: String(TOTAL_REVIEW_COUNT),
+      bestRating: "5",
+      worstRating: "5",
     },
-    review: testimonials.map((t) => ({
+    review: jsonLdReviews.map((t) => ({
       "@type": "Review",
       author: { "@type": "Person", name: t.name },
       reviewRating: { "@type": "Rating", ratingValue: t.rating, bestRating: 5 },
-      reviewBody: t.quote,
+      reviewBody: t.body,
     })),
     makesOffer: [
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Residential Junk Removal" } },

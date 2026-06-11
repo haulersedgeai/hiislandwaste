@@ -1,10 +1,33 @@
 import { site } from "@/lib/site";
 import { locations } from "@/content/locations";
-import { testimonials } from "@/content/testimonials";
+import {
+  testimonials,
+  REVIEW_AVERAGE,
+  TOTAL_REVIEW_COUNT,
+} from "@/content/testimonials";
 import type { Service } from "@/content/services";
 import type { Location } from "@/content/locations";
 import type { FAQ } from "@/content/faq";
 import type { Testimonial } from "@/content/testimonials";
+
+// Curated subset of reviews embedded in LocalBusiness schema. AggregateRating
+// still reports the full 121-review total — we just cap embedded reviews so
+// the JSON-LD payload stays lean across segments (families, kupuna, contractors, realtors).
+const SCHEMA_REVIEW_NAMES = [
+  "Valerie V.",
+  "Donn U.",
+  "Todd Y.",
+  "Stephen Mika'ele LB",
+  "Vance Kamau",
+  "Rusty Crabbe",
+  "Stephanie Goya",
+  "Kevin Kurata",
+  "Andrew Yanagi",
+];
+
+const schemaReviews = SCHEMA_REVIEW_NAMES
+  .map((n) => testimonials.find((t) => t.name === n))
+  .filter((t): t is Testimonial => Boolean(t));
 
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
@@ -90,12 +113,12 @@ export function localBusinessSchema(): Record<string, unknown> {
     sameAs: [site.social.instagram],
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: site.aggregateRating.value,
-      reviewCount: site.aggregateRating.count,
-      bestRating: 5,
-      worstRating: 1,
+      ratingValue: REVIEW_AVERAGE.toFixed(1),
+      reviewCount: String(TOTAL_REVIEW_COUNT),
+      bestRating: "5",
+      worstRating: "5",
     },
-    review: testimonials.map((t) => ({
+    review: schemaReviews.map((t) => ({
       "@type": "Review",
       author: { "@type": "Person", name: t.name },
       reviewRating: {
@@ -104,7 +127,7 @@ export function localBusinessSchema(): Record<string, unknown> {
         bestRating: 5,
         worstRating: 1,
       },
-      reviewBody: t.quote,
+      reviewBody: t.body,
       itemReviewed: { "@id": LOCALBUSINESS_ID },
     })),
     hasOfferCatalog: {
@@ -209,7 +232,7 @@ export function reviewsPageSchema(items: Testimonial[]): Record<string, unknown>
           bestRating: 5,
           worstRating: 1,
         },
-        reviewBody: t.quote,
+        reviewBody: t.body,
         itemReviewed: { "@id": LOCALBUSINESS_ID },
       },
     })),

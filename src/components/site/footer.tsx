@@ -115,7 +115,7 @@ export function Footer() {
           <div className="flex flex-col gap-1">
             <p>© {new Date().getFullYear()} {site.legalName}. All rights reserved.</p>
             <p className="text-white/45">
-              Site by <a href="https://adimize.com" target="_blank" rel="noopener" className="hover:text-white/70 transition-colors">adimize.com</a>
+              Site by <a href="https://adimize.com" target="_blank" rel="noopener" className="hover:text-white/70 transition-colors">Adimize.com</a> — Local Services Digital Marketing
             </p>
           </div>
           <p>Locally owned · Licensed · $2M insured · DOT compliant · Founded 2021</p>

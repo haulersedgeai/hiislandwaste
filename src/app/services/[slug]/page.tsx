@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { PageHero, CTASection, ServiceCard, TestimonialCard } from "@/components/site/sections";
 import { QuoteForm } from "@/components/site/quote-form";
 import { services, getService } from "@/content/services";
-import { testimonials } from "@/content/testimonials";
+import { getTestimonialsForService } from "@/content/testimonials";
 import { site } from "@/lib/site";
 import { JsonLd } from "@/components/schema/JsonLd";
 import { serviceSchema, breadcrumbSchema } from "@/lib/schema";
@@ -44,7 +44,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     .map((s) => getService(s))
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
 
-  const featuredTestimonial = testimonials[0];
+  const serviceTestimonials = getTestimonialsForService(service.slug).slice(0, 2);
 
   const heroImage =
     service.category === "demolition" ? "/images/hero-demolition.jpg"
@@ -170,7 +170,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                   </div>
                 </CardContent>
               </Card>
-              <TestimonialCard testimonial={featuredTestimonial} />
+              {serviceTestimonials.map((t) => (
+                <TestimonialCard key={t.name} testimonial={t} />
+              ))}
             </div>
           </aside>
         </div>

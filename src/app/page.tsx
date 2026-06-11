@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { QuoteForm } from "@/components/site/quote-form";
 import { CTASection, SectionHeading, ServiceCard, TestimonialCard, TrustBar, LocationCard } from "@/components/site/sections";
 import { serviceHubs } from "@/content/services";
-import { testimonials } from "@/content/testimonials";
+import { getFeaturedTestimonials, TOTAL_REVIEW_COUNT } from "@/content/testimonials";
 import { customerSegments } from "@/content/customer-segments";
 import { locations } from "@/content/locations";
 import { site } from "@/lib/site";
@@ -15,6 +15,7 @@ export default function HomePage() {
   const featuredLocations = locations.filter((l) =>
     ["hilo", "keaau", "pahoa", "hawaiian-paradise-park", "volcano", "waimea", "kailua-kona", "honokaa"].includes(l.slug)
   );
+  const featuredTestimonials = getFeaturedTestimonials(6);
 
   return (
     <>
@@ -56,7 +57,14 @@ export default function HomePage() {
               </Button>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-6 text-sm text-white/80">
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/80">
+              <Link
+                href="/reviews"
+                className="inline-flex items-center gap-1.5 rounded-full bg-(--color-volcano-500)/20 border border-(--color-volcano-300)/50 px-3 py-1 font-bold text-white hover:bg-(--color-volcano-500)/30 transition-colors"
+              >
+                <Star className="size-4 fill-(--color-volcano-300) text-(--color-volcano-300)" />
+                5.0 · {TOTAL_REVIEW_COUNT} Reviews on Google & Yelp
+              </Link>
               <span className="inline-flex items-center gap-1.5"><Shield className="size-4 text-(--color-volcano-300)" /> $2M Insured</span>
               <span className="inline-flex items-center gap-1.5"><Award className="size-4 text-(--color-volcano-300)" /> Featured on HGTV</span>
               <span className="inline-flex items-center gap-1.5"><Clock className="size-4 text-(--color-volcano-300)" /> Mon–Sun 7am–8pm</span>
@@ -216,7 +224,7 @@ export default function HomePage() {
               <div className="grid grid-cols-2 gap-2">
                 <div className="relative aspect-[3/4] rounded-xl overflow-hidden border border-(--color-sand-200)">
                   <Image
-                    src="/images/before-after/yard-tarp-debris-before.jpg"
+                    src="/images/before-after/yard-tarp-debris-after.jpg"
                     alt="Yard piled with construction debris under a green tarp before Hawaii Island Waste cleanup"
                     fill
                     className="object-cover"
@@ -226,8 +234,8 @@ export default function HomePage() {
                 </div>
                 <div className="relative aspect-[3/4] rounded-xl overflow-hidden border border-(--color-sand-200)">
                   <Image
-                    src="/images/before-after/yard-tarp-debris-after.jpg"
-                    alt="Same yard cleared of debris by Hawaii Island Waste, tarp packed, ground exposed"
+                    src="/images/before-after/yard-tarp-debris-before.jpg"
+                    alt="Same yard cleared of debris by Hawaii Island Waste, ready for landscape"
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 50vw, 25vw"
@@ -263,8 +271,8 @@ export default function HomePage() {
               <span className="ml-2 text-white/85 text-sm">Real reviews. Real names.</span>
             </div>
           </div>
-          <div className="mt-12 grid md:grid-cols-3 gap-5">
-            {testimonials.slice(0, 3).map((t) => (
+          <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {featuredTestimonials.map((t) => (
               <TestimonialCard key={t.name} testimonial={t} />
             ))}
           </div>

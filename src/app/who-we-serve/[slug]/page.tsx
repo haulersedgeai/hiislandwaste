@@ -8,7 +8,7 @@ import { PageHero, CTASection, ServiceCard, TestimonialCard } from "@/components
 import { QuoteForm } from "@/components/site/quote-form";
 import { customerSegments, getSegment } from "@/content/customer-segments";
 import { getService } from "@/content/services";
-import { testimonials } from "@/content/testimonials";
+import { getTestimonialsForSegment } from "@/content/testimonials";
 import { site } from "@/lib/site";
 
 export const dynamicParams = false;
@@ -37,9 +37,7 @@ export default async function SegmentPage({ params }: { params: Promise<{ slug: 
     .map((s) => getService(s))
     .filter((s): s is NonNullable<typeof s> => Boolean(s));
 
-  const featuredTestimonials = (seg.testimonialNames ?? [])
-    .map((n) => testimonials.find((t) => t.name === n))
-    .filter((t): t is NonNullable<typeof t> => Boolean(t));
+  const featuredTestimonials = getTestimonialsForSegment(seg.slug).slice(0, 3);
 
   return (
     <>
