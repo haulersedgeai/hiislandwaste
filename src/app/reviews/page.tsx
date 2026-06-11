@@ -19,11 +19,11 @@ export const metadata: Metadata = {
   alternates: { canonical: "/reviews" },
 };
 
-// TODO(verify): Replace with the verified Google Business Profile URL once confirmed.
-const GOOGLE_BUSINESS_URL = "https://www.google.com/maps/place/Hawaii+Island+Waste";
-// TODO(verify): Replace with the verified Yelp profile URL once confirmed.
-const YELP_BUSINESS_URL =
-  "https://www.yelp.com/biz/hawaii-island-waste-junk-removal-and-dumpster-rental-hilo";
+// Search-result fallback that reliably surfaces the Google Business knowledge panel.
+// Swap for the canonical "share review" link from the Business Profile dashboard when available.
+const GOOGLE_BUSINESS_URL =
+  "https://www.google.com/search?q=Hawaii+Island+Waste+Junk+Removal+Hilo";
+const YELP_BUSINESS_URL = "https://www.yelp.com/biz/hawaii-island-waste-hilo";
 
 const SEGMENT_GROUPS: { tag: string; label: string }[] = [
   { tag: "families", label: "Families" },
