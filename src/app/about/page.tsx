@@ -55,12 +55,32 @@ export default function AboutPage() {
           <aside className="lg:col-span-5 space-y-6">
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-(--color-sand-200)">
               <Image
-                src="/images/gallery/photo-033.jpg"
-                alt="Hawaii Island Waste team"
+                src="/images/about/naea-chae-portrait.jpg"
+                alt="Sherman 'Naea' and Chae Kaopua, founders of Hawaii Island Waste, in matching HIW polos"
                 fill
-                className="object-cover"
+                className="object-cover object-top"
                 sizes="(max-width: 1024px) 100vw, 40vw"
               />
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="relative aspect-square rounded-xl overflow-hidden border border-(--color-sand-200)">
+                <Image
+                  src="/images/about/naea-chae-family.jpg"
+                  alt="Naea and Chae Kaopua with their two children and the Hawaii Island Waste truck at Hilo Bay"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 50vw, 20vw"
+                />
+              </div>
+              <div className="relative aspect-square rounded-xl overflow-hidden border border-(--color-sand-200)">
+                <Image
+                  src="/images/about/naea-excavator.jpg"
+                  alt="Sherman 'Naea' Kaopua operating a CAT 303 mini excavator on a Hilo job site"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 50vw, 20vw"
+                />
+              </div>
             </div>
             <div className="rounded-xl border border-(--color-sand-200) bg-(--color-sand-50) p-6">
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-(--color-volcano-500)">By the Numbers</p>
@@ -141,8 +161,8 @@ export default function AboutPage() {
           </div>
           <div className="md:col-span-5 relative aspect-[4/3] rounded-2xl overflow-hidden border border-(--color-sand-200)">
             <Image
-              src="/images/gallery/photo-024.jpg"
-              alt="Demolition project"
+              src="/images/services/demolition-fence-crew.jpg"
+              alt="Hawaii Island Waste crew carrying out a chain-link fence panel during a demolition job"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 40vw"

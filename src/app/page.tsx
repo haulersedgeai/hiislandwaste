@@ -112,8 +112,8 @@ export default function HomePage() {
           </div>
           <div className="lg:col-span-5 relative aspect-square rounded-2xl overflow-hidden">
             <Image
-              src="/images/gallery/photo-022.jpg"
-              alt="Hawaii Island Waste crew at work"
+              src="/images/about/naea-with-customer.jpg"
+              alt="Naea Kaopua, owner of Hawaii Island Waste, reviewing a job estimate with a customer"
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 40vw"
@@ -170,6 +170,80 @@ export default function HomePage() {
                 </p>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Before / After */}
+      <section className="py-16 md:py-24 bg-white border-t border-(--color-sand-200)">
+        <div className="container-x">
+          <SectionHeading
+            eyebrow="Real Transformations"
+            title="Before & After — same property, fresh start."
+            subtitle="Real Hawaiʻi Island jobs. We cleared the brush, hauled the debris, and gave these properties their clean slate."
+            center
+          />
+          <div className="mt-12 grid md:grid-cols-2 gap-8">
+            <figure className="space-y-3">
+              <div className="grid grid-cols-2 gap-2">
+                <div className="relative aspect-[3/4] rounded-xl overflow-hidden border border-(--color-sand-200)">
+                  <Image
+                    src="/images/before-after/shed-overgrown-before.jpg"
+                    alt="Overgrown property with rusted shed and scattered debris before Hawaii Island Waste cleanout"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                  <span className="absolute top-2 left-2 bg-(--color-ocean-800) text-white text-xs font-bold uppercase tracking-wide px-2 py-1 rounded">Before</span>
+                </div>
+                <div className="relative aspect-[3/4] rounded-xl overflow-hidden border border-(--color-sand-200)">
+                  <Image
+                    src="/images/before-after/shed-cleared-after.jpg"
+                    alt="Same property after Hawaii Island Waste cleared the brush and debris, exposing the shed and graded ground"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                  <span className="absolute top-2 left-2 bg-(--color-volcano-500) text-white text-xs font-bold uppercase tracking-wide px-2 py-1 rounded">After</span>
+                </div>
+              </div>
+              <figcaption className="text-sm text-(--color-ocean-700)/80">
+                <strong className="font-display text-(--color-ocean-800)">Hilo property cleanup.</strong> Overgrown lot with derelict outbuilding → cleared and ready.
+              </figcaption>
+            </figure>
+
+            <figure className="space-y-3">
+              <div className="grid grid-cols-2 gap-2">
+                <div className="relative aspect-[3/4] rounded-xl overflow-hidden border border-(--color-sand-200)">
+                  <Image
+                    src="/images/before-after/yard-tarp-debris-before.jpg"
+                    alt="Yard piled with construction debris under a green tarp before Hawaii Island Waste cleanup"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                  <span className="absolute top-2 left-2 bg-(--color-ocean-800) text-white text-xs font-bold uppercase tracking-wide px-2 py-1 rounded">Before</span>
+                </div>
+                <div className="relative aspect-[3/4] rounded-xl overflow-hidden border border-(--color-sand-200)">
+                  <Image
+                    src="/images/before-after/yard-tarp-debris-after.jpg"
+                    alt="Same yard cleared of debris by Hawaii Island Waste, tarp packed, ground exposed"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                  <span className="absolute top-2 left-2 bg-(--color-volcano-500) text-white text-xs font-bold uppercase tracking-wide px-2 py-1 rounded">After</span>
+                </div>
+              </div>
+              <figcaption className="text-sm text-(--color-ocean-700)/80">
+                <strong className="font-display text-(--color-ocean-800)">Construction debris haul-off.</strong> Tarp-covered debris pile → cleared lot, ready for landscape.
+              </figcaption>
+            </figure>
+          </div>
+          <div className="mt-10 text-center">
+            <Button asChild variant="outline" size="lg">
+              <Link href="/gallery">See More Real Jobs <ArrowRight className="size-4" /></Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -242,8 +316,8 @@ export default function HomePage() {
           </div>
           <div className="md:col-span-5 relative aspect-[4/3] rounded-2xl overflow-hidden border border-(--color-sand-200)">
             <Image
-              src="/images/gallery/photo-024.jpg"
-              alt="Hawaii Island Waste demolition project"
+              src="/images/services/demolition-fence-crew.jpg"
+              alt="Hawaii Island Waste crew carrying out a chain-link fence panel during a demolition project"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 40vw"
