@@ -31,11 +31,11 @@ export const site = {
 };
 
 export const primaryNav = [
+  { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
   { href: "/service-area", label: "Service Area" },
   { href: "/who-we-serve", label: "Who We Serve" },
   { href: "/gallery", label: "Gallery" },
-  { href: "/contact", label: "Contact" },
 ] as const;
 
 export const footerLinks = {

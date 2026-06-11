@@ -161,8 +161,8 @@ export default function AboutPage() {
           </div>
           <div className="md:col-span-5 relative aspect-[4/3] rounded-2xl overflow-hidden border border-(--color-sand-200)">
             <Image
-              src="/images/services/demolition-fence-crew.jpg"
-              alt="Hawaii Island Waste crew carrying out a chain-link fence panel during a demolition job"
+              src="/images/gallery/photo-046.jpg"
+              alt="Hawaii Island Waste CAT excavator loading demolition debris into a hauling truck on a Hawaiʻi Island jobsite"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 40vw"

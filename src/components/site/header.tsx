@@ -103,13 +103,6 @@ export function Header() {
                 </Link>
               ))}
               <Link
-                href="/about"
-                onClick={() => setOpen(false)}
-                className="border-b border-(--color-sand-200) py-4 text-lg font-semibold text-(--color-ocean-800)"
-              >
-                About
-              </Link>
-              <Link
                 href="/faq"
                 onClick={() => setOpen(false)}
                 className="border-b border-(--color-sand-200) py-4 text-lg font-semibold text-(--color-ocean-800)"

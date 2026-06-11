@@ -26,10 +26,10 @@ export default function HomePage() {
             alt="Hawaii Island Waste crew loading materials"
             fill
             priority
-            className="object-cover opacity-30"
+            className="object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-(--color-ocean-900)/95 via-(--color-ocean-800)/85 to-(--color-volcano-700)/60" />
+          <div className="absolute inset-0 bg-gradient-to-r from-(--color-ocean-900)/85 via-(--color-ocean-900)/55 to-(--color-ocean-900)/20" />
         </div>
 
         <div className="relative container-x py-16 md:py-24 lg:py-28 grid lg:grid-cols-12 gap-10 items-center">
