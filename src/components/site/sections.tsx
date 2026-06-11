@@ -149,10 +149,9 @@ export function ServiceCard({ service }: { service: Service }) {
       <div className="p-6 pt-0">
         <Link
           href={`/services/${service.slug}`}
-          aria-label={`Learn more about ${service.title}`}
           className="inline-flex items-center gap-1.5 text-sm font-bold text-(--color-volcano-500) hover:text-(--color-volcano-600)"
         >
-          Learn more <ArrowRight className="size-3.5" />
+          Learn more<span className="sr-only"> about {service.title}</span> <ArrowRight className="size-3.5" />
         </Link>
       </div>
     </Card>
