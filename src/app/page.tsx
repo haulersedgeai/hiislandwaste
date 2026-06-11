@@ -27,6 +27,7 @@ export default function HomePage() {
             alt="Hawaii Island Waste crew loading materials"
             fill
             priority
+            fetchPriority="high"
             className="object-cover"
             sizes="100vw"
           />

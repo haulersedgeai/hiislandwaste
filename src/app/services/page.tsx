@@ -63,6 +63,7 @@ export default function ServicesPage() {
                   <Link
                     key={s.slug}
                     href={`/services/${s.slug}`}
+                    aria-label={`Learn more about ${s.title}`}
                     className="group rounded-lg border border-(--color-sand-200) bg-white p-5 hover:border-(--color-volcano-300) hover:shadow-md transition-all"
                   >
                     <h3 className="font-display font-bold text-(--color-ocean-800) group-hover:text-(--color-volcano-500) transition-colors">
