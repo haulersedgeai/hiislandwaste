@@ -1,5 +1,16 @@
 export type Region = "east-hawaii" | "north-hawaii" | "west-hawaii" | "south-hawaii";
 
+export type RoutedFacility =
+  | "east-sort-station"
+  | "west-landfill"
+  | "east-organics"
+  | "west-organics";
+
+export type ResponseWindow =
+  | "Same-day or next-day"
+  | "Scheduled — typically 2-3 days"
+  | "Scheduled days only";
+
 export interface Location {
   slug: string;
   name: string;
@@ -11,7 +22,38 @@ export interface Location {
   neighborhoods: string[];
   landmarks: string[];
   roads: string[];
+  /** Where general loads from this town route. Demo/C&D always goes to West Hawaiʻi Landfill regardless. */
+  routedTo?: RoutedFacility[];
+  /** 2–3 sentence note: road approach, elevation/climate, lot type, anything affecting job logistics. */
+  localNotes?: string;
+  /** Honest response-time window based on distance from Hilo base. */
+  responseTime?: ResponseWindow;
 }
+
+export const FACILITY_DETAILS: Record<RoutedFacility, { name: string; place: string; description: string }> = {
+  "east-sort-station": {
+    name: "East Hawaiʻi Regional Sort Station",
+    place: "Hilo",
+    description:
+      "the County of Hawaiʻi's east-side facility for residential and commercial loads, off Kanoelehua Avenue in Hilo.",
+  },
+  "west-landfill": {
+    name: "West Hawaiʻi Sanitary Landfill",
+    place: "Puʻuanahulu",
+    description:
+      "the County's only active sanitary landfill — and the required destination for all construction & demolition (C&D) and grading & grubbing (G&G) debris from anywhere on Hawaiʻi Island.",
+  },
+  "east-organics": {
+    name: "East Hawaiʻi Organics Facility",
+    place: "Hilo",
+    description: "the east-side composting facility for greenwaste and yard waste.",
+  },
+  "west-organics": {
+    name: "West Hawaiʻi Organics Facility",
+    place: "Puʻuanahulu",
+    description: "the west-side composting facility for greenwaste and yard waste.",
+  },
+};
 
 export const regions: Record<
   Region,
@@ -66,6 +108,10 @@ export const locations: Location[] = [
     neighborhoods: ["Downtown Hilo", "Bayfront", "Kaumana", "Waiākea", "Keaukaha", "Pana'ewa", "Wainaku", "Piʻihonua"],
     landmarks: ["Hilo Bay", "Liliʻuokalani Gardens", "Wailoa River State Park", "Rainbow Falls", "Banyan Drive", "Hilo Farmers Market", "Coconut Island (Moku Ola)"],
     roads: ["Hawaii Belt Road", "Highway 11", "Highway 19", "Bayfront Highway", "Kanoelehua Avenue"],
+    routedTo: ["east-sort-station", "east-organics", "west-landfill"],
+    localNotes:
+      "Hilo is windward rainforest — averaging around 130 inches of rain a year — so older downtown homes sit on tight lots with carports and narrow driveways that need careful truck staging. Our base is here, so we can almost always work a Hilo job within a day or two.",
+    responseTime: "Same-day or next-day",
   },
   {
     slug: "kaumana",
@@ -80,6 +126,10 @@ export const locations: Location[] = [
     neighborhoods: ["Kaumana Estates", "Kaumana Drive corridor", "Kūlana", "Piʻihonua-upper"],
     landmarks: ["Kaumana Caves State Park", "Wailuku River", "Boiling Pots", "Peʻepeʻe Falls"],
     roads: ["Kaumana Drive", "Saddle Road (Hwy 200 / Daniel K. Inouye Hwy)"],
+    routedTo: ["east-sort-station", "east-organics", "west-landfill"],
+    localNotes:
+      "Kaumana sits above Hilo on the lava-tube side, where Kaumana Drive narrows and climbs through older homes on smaller lots. The uphill approach matters for dumpster placement — we scout a flat staging spot before drop-off.",
+    responseTime: "Same-day or next-day",
   },
   {
     slug: "keaau",
@@ -94,6 +144,10 @@ export const locations: Location[] = [
     neighborhoods: ["Keaʻau Town", "Hawaiian Paradise Park (HPP)", "Orchidland Estates", "Ainaloa", "Hawaiian Acres-east"],
     landmarks: ["Keaʻau Beach Park", "Shipman Estate", "Keaʻau-Pāhoa Road corridor"],
     roads: ["Highway 11", "Highway 130 (Keaʻau-Pāhoa Road)", "Hawaii Belt Road"],
+    routedTo: ["east-sort-station", "east-organics", "west-landfill"],
+    localNotes:
+      "Keaʻau sits at the Hwy 11 / Hwy 130 junction — gateway to HPP, Orchidland, Ainaloa and the rest of Puna. Subdivision lots are typically one acre with long gravel approach drives, so we plan tow paths and turnarounds before the truck rolls.",
+    responseTime: "Same-day or next-day",
   },
   {
     slug: "pahoa",
@@ -108,6 +162,10 @@ export const locations: Location[] = [
     neighborhoods: ["Pāhoa Village", "Leilani Estates", "Nānāwale Estates", "Lava Tree subdivision", "Kaimū"],
     landmarks: ["Lava Tree State Monument", "Pohoiki (Isaac Hale Beach Park)", "Akebono Theater", "Maku'u Farmers Market"],
     roads: ["Highway 130", "Pohoiki Road", "Government Beach Road"],
+    routedTo: ["east-sort-station", "east-organics", "west-landfill"],
+    localNotes:
+      "Pāhoa, Leilani and Nānāwale sit in Lava Zones 1 and 2, with many post-2018 eruption rebuilds and lava-rock terrain that affects equipment routing. We've done a lot of post-construction debris haul-off and lot clearing in this area.",
+    responseTime: "Same-day or next-day",
   },
   {
     slug: "hawaiian-paradise-park",
@@ -120,8 +178,12 @@ export const locations: Location[] = [
     intro:
       "HPP is the biggest subdivision on Hawai'i Island — eight sections, miles of straight streets, and a whole lot of homes that have been built, expanded and rebuilt over the years. We work HPP regularly — from the Maku'u side up through Kaloli Point.",
     neighborhoods: ["HPP Sections 1–8", "Maku'u side", "Kaloli Point area", "Beach Road frontage"],
-    landmarks: ["Maku'u Drive", "Paradise Park Beach access", "Kaloli Point", "HPP Activity Center"],
+    landmarks: ["Maku'u Drive", "Paradise Drive", "Beach Road", "Highway 130", "HPP Activity Center"],
     roads: ["Maku'u Drive", "Paradise Drive", "Beach Road", "Highway 130"],
+    routedTo: ["east-sort-station", "east-organics", "west-landfill"],
+    localNotes:
+      "HPP is the island's biggest subdivision — eight sections of one-acre lots on a straight-street grid off Hwy 130. Long gravel approach drives are the rule, not the exception, so we confirm site access and turnaround space before scheduling.",
+    responseTime: "Same-day or next-day",
   },
   {
     slug: "orchidland-estates",
@@ -136,6 +198,10 @@ export const locations: Location[] = [
     neighborhoods: ["Orchidland", "Orchidland-mauka", "Orchidland-makai"],
     landmarks: ["Highway 130 corridor", "'Olaʻa Forest edge", "Kalapana access"],
     roads: ["Highway 130", "Orchid Drive"],
+    routedTo: ["east-sort-station", "east-organics", "west-landfill"],
+    localNotes:
+      "Orchidland sits along Hwy 130 between Keaʻau and Pāhoa with the same big-lot, big-brush feel as HPP. Lots of older sheds, brush piles and post-construction debris work — straightforward access off the highway.",
+    responseTime: "Same-day or next-day",
   },
   {
     slug: "ainaloa",
@@ -150,6 +216,10 @@ export const locations: Location[] = [
     neighborhoods: ["Ainaloa Village", "Ainaloa estates", "Ainaloa-makai"],
     landmarks: ["Highway 130 corridor", "Pāhoa-Keaʻau midpoint", "Mauna Loa lower slopes"],
     roads: ["Highway 130", "Ainaloa Boulevard"],
+    routedTo: ["east-sort-station", "east-organics", "west-landfill"],
+    localNotes:
+      "Ainaloa sits on Hwy 130 between Keaʻau and Pāhoa — quiet, residential, with the same big-lot Puna feel. Most jobs route easily off Ainaloa Boulevard.",
+    responseTime: "Same-day or next-day",
   },
   {
     slug: "hawaiian-acres",
@@ -164,6 +234,10 @@ export const locations: Location[] = [
     neighborhoods: ["Hawaiian Acres", "Hawaiian Acres Roads (numbered)", "Mountain View side"],
     landmarks: ["'Ola'a Forest Reserve edge", "Mountain View access", "Volcano Highway corridor"],
     roads: ["Highway 11 (Volcano Highway)", "Hawaiian Acres Roads 1–9"],
+    routedTo: ["east-sort-station", "east-organics", "west-landfill"],
+    localNotes:
+      "Hawaiian Acres runs off Hwy 11 on the Mountain View side — large lots, plenty of off-grid living, and the numbered gravel Roads 1–9. We bring the smaller truck when the approach drive can't handle full-size.",
+    responseTime: "Same-day or next-day",
   },
   {
     slug: "kurtistown",
@@ -178,6 +252,10 @@ export const locations: Location[] = [
     neighborhoods: ["Kurtistown Village", "Kurtistown-mauka"],
     landmarks: ["Mauna Loa Macadamia Nut Estate (nearby)", "'Ola'a Forest Reserve", "Highway 11 corridor"],
     roads: ["Highway 11 (Volcano Highway)", "Old Volcano Road"],
+    routedTo: ["east-sort-station", "east-organics", "west-landfill"],
+    localNotes:
+      "Kurtistown sits along Hwy 11 between Keaʻau and Mountain View — small village, but a regular stop when we're running the Volcano route.",
+    responseTime: "Same-day or next-day",
   },
   {
     slug: "mountain-view",
@@ -192,6 +270,10 @@ export const locations: Location[] = [
     neighborhoods: ["Mountain View Village", "Fern Acres", "Eden Roc", "Mountain View-mauka"],
     landmarks: ["Volcano Highway corridor", "Mauna Loa slopes", "'Ola'a Forest"],
     roads: ["Highway 11 (Volcano Highway)", "South Kulani Road"],
+    routedTo: ["east-sort-station", "east-organics", "west-landfill"],
+    localNotes:
+      "Mountain View runs along the Volcano Highway midway between Hilo and Volcano Village — cooler weather, bigger trees, mostly older homes plus the Fern Acres and Eden Roc subdivisions climbing mauka.",
+    responseTime: "Same-day or next-day",
   },
   {
     slug: "volcano",
@@ -206,6 +288,10 @@ export const locations: Location[] = [
     neighborhoods: ["Volcano Village", "Mauna Loa Estates", "Royal Hawaiian Estates", "Fern Forest"],
     landmarks: ["Hawaiʻi Volcanoes National Park", "Kīlauea Caldera", "Volcano Art Center", "Chain of Craters Road"],
     roads: ["Highway 11 (Volcano Highway)", "Old Volcano Road", "Chain of Craters Road"],
+    routedTo: ["east-sort-station", "east-organics", "west-landfill"],
+    localNotes:
+      "Volcano Village sits at roughly 4,000 ft on the rim of Kīlauea — cool, misty, forested, with lava-rock substrate that requires careful equipment routing on driveways. About 45 minutes from our Hilo base, so we typically schedule out a day or two.",
+    responseTime: "Scheduled — typically 2-3 days",
   },
   {
     slug: "papaikou",
@@ -220,6 +306,10 @@ export const locations: Location[] = [
     neighborhoods: ["Papaʻikou Village", "Papaʻikou-mauka", "Onomea-side"],
     landmarks: ["Onomea Bay", "Hawaii Tropical Bioreserve & Garden", "Onomea Scenic Drive"],
     roads: ["Highway 19", "Old Māmalahoa Highway", "Scenic Route"],
+    routedTo: ["east-sort-station", "east-organics", "west-landfill"],
+    localNotes:
+      "Papaʻikou is the first Hāmākua town north of Hilo, with steep coastal lots off the Onomea scenic drive and a mix of plantation-era homes and new builds. Quick run for our Hilo base.",
+    responseTime: "Same-day or next-day",
   },
   {
     slug: "pepeekeo",
@@ -234,6 +324,10 @@ export const locations: Location[] = [
     neighborhoods: ["Pepeʻekeo Village", "Mauna Kea Sugar Mill area", "Pepeʻekeo-mauka"],
     landmarks: ["Pepeʻekeo Scenic Drive", "Onomea Falls", "Old Mauna Kea Sugar Mill"],
     roads: ["Highway 19", "Pepeʻekeo Scenic Drive (Old Māmalahoa)"],
+    routedTo: ["east-sort-station", "east-organics", "west-landfill"],
+    localNotes:
+      "Pepeʻekeo sits along the Hāmākua coast just north of Papaʻikou — old plantation country, scenic drive, lots of homes set back in the cane fields and forests. Steep coastal terrain means we scout truck staging carefully.",
+    responseTime: "Same-day or next-day",
   },
   {
     slug: "honomu",
@@ -248,6 +342,10 @@ export const locations: Location[] = [
     neighborhoods: ["Honomū Town", "Honomū-mauka", "Akaka Falls Road area"],
     landmarks: ["Akaka Falls State Park", "Kahuna Falls", "Honomū historic district"],
     roads: ["Highway 19", "Akaka Falls Road (Hwy 220)"],
+    routedTo: ["east-sort-station", "east-organics", "west-landfill"],
+    localNotes:
+      "Honomū is the small Hāmākua village at the Akaka Falls turnoff — historic main street, sugar-era buildings, homes tucked into rainforest above and below.",
+    responseTime: "Same-day or next-day",
   },
   {
     slug: "hakalau",
@@ -262,6 +360,10 @@ export const locations: Location[] = [
     neighborhoods: ["Hakalau Bay area", "Hakalau-mauka", "Hakalau Plantation"],
     landmarks: ["Hakalau Forest National Wildlife Refuge", "Hakalau Bay", "Old Hakalau Sugar Mill site"],
     roads: ["Highway 19", "Old Māmalahoa Highway"],
+    routedTo: ["east-sort-station", "east-organics", "west-landfill"],
+    localNotes:
+      "Hakalau sits along the windward coast north of Honomū — small, rainy, beautiful. We work the bay-side homes and forested lots climbing mauka toward the wildlife refuge boundary.",
+    responseTime: "Same-day or next-day",
   },
   {
     slug: "laupahoehoe",
@@ -276,6 +378,10 @@ export const locations: Location[] = [
     neighborhoods: ["Laupāhoehoe Town", "Laupāhoehoe Point", "Pāpa'aloa", "Laupāhoehoe-mauka"],
     landmarks: ["Laupāhoehoe Point Park", "Laupāhoehoe Train Museum", "Hāmākua coast cliffs"],
     roads: ["Highway 19", "Old Māmalahoa Highway"],
+    routedTo: ["east-sort-station", "east-organics", "west-landfill"],
+    localNotes:
+      "Laupāhoehoe is the historic coastal town along the Hāmākua coast — dramatic Point, old plantation village, and homes scattered through ranchland. About 45 minutes north of Hilo, so we typically batch jobs in this stretch.",
+    responseTime: "Scheduled — typically 2-3 days",
   },
 
   // ────────────── NORTH HAWAIʻI ──────────────
@@ -292,6 +398,10 @@ export const locations: Location[] = [
     neighborhoods: ["Honokaʻa Town", "Pa'auilo-side", "Kalōpā", "Honokaʻa-mauka"],
     landmarks: ["Honokaʻa People's Theatre", "Kalōpā State Recreation Area", "Hāmākua Coast cliffs"],
     roads: ["Highway 19 (Māmalahoa Hwy)", "Highway 240 (to Waipiʻo)"],
+    routedTo: ["east-sort-station", "east-organics", "west-landfill"],
+    localNotes:
+      "Honokaʻa is the heart of upper Hāmākua — historic main street, former plantation lands, steep coastal terrain off Hwy 19. Roughly an hour from Hilo, so we batch Honokaʻa/Pāʻauilo runs on scheduled days.",
+    responseTime: "Scheduled — typically 2-3 days",
   },
   {
     slug: "paauilo",
@@ -306,6 +416,10 @@ export const locations: Location[] = [
     neighborhoods: ["Paʻauilo-makai", "Paʻauilo-mauka", "Kalōpā area"],
     landmarks: ["Paʻauilo Plantation Village", "Kalōpā State Park", "Hāmākua coastline"],
     roads: ["Highway 19 (Māmalahoa Hwy)"],
+    routedTo: ["east-sort-station", "east-organics", "west-landfill"],
+    localNotes:
+      "Paʻauilo sits along Hwy 19 between Honokaʻa and Laupāhoehoe — old sugar-cane country turned ranchland and small farms. Big lots and big projects, run on scheduled Hāmākua days.",
+    responseTime: "Scheduled — typically 2-3 days",
   },
   {
     slug: "waimea",
@@ -320,6 +434,10 @@ export const locations: Location[] = [
     neighborhoods: ["Waimea Town", "Lālāmilo", "Puʻukapu Homesteads", "Waikiʻi", "Pu'u Loa", "Waikoloa Heights-side"],
     landmarks: ["Parker Ranch", "Puʻukoholā Heiau (Kawaihae)", "Mauna Kea base", "Hwy 190 / Hwy 19 junction"],
     roads: ["Highway 19", "Highway 190 (Māmalahoa Hwy)", "Highway 250 (Kohala Mountain Road)"],
+    routedTo: ["west-organics", "west-landfill"],
+    localNotes:
+      "Waimea (Kamuela) is paniolo country — 2,600 ft elevation, cool weather, big ranch properties with outbuildings. We typically reach Waimea via Saddle Road (Hwy 200) from Hilo on scheduled Kohala-side days.",
+    responseTime: "Scheduled — typically 2-3 days",
   },
   {
     slug: "hawi",
@@ -334,6 +452,10 @@ export const locations: Location[] = [
     neighborhoods: ["Hāwī Town", "Hāwī-mauka", "Halaʻula"],
     landmarks: ["King Kamehameha I statue (original)", "Pololū Valley overlook", "Akoni Pule Highway"],
     roads: ["Highway 270 (Akoni Pule Hwy)", "Highway 250 (Kohala Mountain Road)"],
+    routedTo: ["west-organics", "west-landfill"],
+    localNotes:
+      "Hāwī is the northernmost town on Hawaiʻi Island — historic plantation main street out past Kapaʻau on Hwy 270. About two hours from our Hilo base, so we run North Kohala on scheduled days.",
+    responseTime: "Scheduled days only",
   },
   {
     slug: "kapaau",
@@ -348,6 +470,10 @@ export const locations: Location[] = [
     neighborhoods: ["Kapaʻau Town", "Niuliʻi", "Kohala Estates"],
     landmarks: ["Original King Kamehameha I Statue", "Pololū Lookout", "Kohala Mountain"],
     roads: ["Highway 270 (Akoni Pule Hwy)"],
+    routedTo: ["west-organics", "west-landfill"],
+    localNotes:
+      "Kapaʻau is the small town just east of Hāwī along Hwy 270 — home of the original Kamehameha statue and the gateway to Pololū. Same scheduled-day pattern as Hāwī.",
+    responseTime: "Scheduled days only",
   },
 
   // ────────────── WEST HAWAIʻI ──────────────
@@ -363,7 +489,11 @@ export const locations: Location[] = [
       "Kailua-Kona is the heart of West Hawaiʻi — the historic Aliʻi Drive coast, the airport gateway, and the Kona town all visitors know. We service the Kona side on scheduled days; for larger projects we'll come anytime — just ask about minimums.",
     neighborhoods: ["Kailua Village (Aliʻi Drive)", "Kona Heights", "Holualoa-side", "Keahole-side", "Kalaoa"],
     landmarks: ["Aliʻi Drive", "Kailua Pier", "Hulihe'e Palace", "Mokuaikaua Church", "Kona International Airport"],
-    roads: ["Highway 11 (Hawaii Belt Road)", "Highway 19", "Aliʻi Drive", "Queen Kaʻahumanu Highway"],
+    roads: ["Highway 11 (Hawaii Belt Road)", "Highway 19 (Queen Kaʻahumanu Hwy)", "Saddle Road (Hwy 200)", "Aliʻi Drive"],
+    routedTo: ["west-organics", "west-landfill"],
+    localNotes:
+      "Kailua-Kona is dry-side coastal — the resort heart of Aliʻi Drive plus the Kona Heights residential climb above town. From Hilo it's about two hours via Saddle Road (Hwy 200) or three via the Belt Road, so we batch Kona-side projects on scheduled runs.",
+    responseTime: "Scheduled — typically 2-3 days",
   },
   {
     slug: "holualoa",
@@ -378,6 +508,10 @@ export const locations: Location[] = [
     neighborhoods: ["Holualoa Village", "Holualoa Mauka", "Coffee belt area"],
     landmarks: ["Holualoa Art Village", "Hualālai slope", "Kona Coffee Country"],
     roads: ["Highway 180 (Māmalahoa Hwy - upper)", "Highway 190"],
+    routedTo: ["west-organics", "west-landfill"],
+    localNotes:
+      "Holualoa is coffee country — mountainside above Kona on Hwy 180 with narrow uphill drives and farm-property layouts. Same scheduled Kona-side cadence.",
+    responseTime: "Scheduled — typically 2-3 days",
   },
   {
     slug: "kealakekua",
@@ -392,6 +526,10 @@ export const locations: Location[] = [
     neighborhoods: ["Kealakekua Town", "Captain Cook-side", "Kealakekua-mauka"],
     landmarks: ["Kealakekua Bay", "Captain Cook Monument", "Greenwell Coffee Farm"],
     roads: ["Highway 11 (Māmalahoa Hwy)", "Napoʻopoʻo Road"],
+    routedTo: ["west-organics", "west-landfill"],
+    localNotes:
+      "Kealakekua sits in South Kona above the famous bay — old coffee country, plenty of older homes on Hwy 11 frontage. Scheduled Kona-side days from our Hilo base.",
+    responseTime: "Scheduled — typically 2-3 days",
   },
   {
     slug: "captain-cook",
@@ -406,6 +544,10 @@ export const locations: Location[] = [
     neighborhoods: ["Captain Cook Village", "Honaunau-side", "Captain Cook-mauka"],
     landmarks: ["Captain Cook Monument", "Manago Hotel", "Greenwell Farms"],
     roads: ["Highway 11 (Māmalahoa Hwy)"],
+    routedTo: ["west-organics", "west-landfill"],
+    localNotes:
+      "Captain Cook is the mauka village along Hwy 11 in South Kona — coffee farms, the historic Manago Hotel, and a long band of homes climbing the slope.",
+    responseTime: "Scheduled — typically 2-3 days",
   },
   {
     slug: "honaunau",
@@ -420,6 +562,10 @@ export const locations: Location[] = [
     neighborhoods: ["Hōnaunau", "Hōnaunau-mauka", "Hoʻokena-side"],
     landmarks: ["Puʻuhonua o Hōnaunau (Place of Refuge)", "Two Step snorkel area", "Hōnaunau Bay"],
     roads: ["Highway 11 (Māmalahoa Hwy)", "Highway 160 (Puʻuhonua Road)"],
+    routedTo: ["west-organics", "west-landfill"],
+    localNotes:
+      "Hōnaunau is South Kona at its most historic — quiet coastal community, narrow lanes off Hwy 160 down to the Place of Refuge. Scheduled Kona-side days.",
+    responseTime: "Scheduled — typically 2-3 days",
   },
   {
     slug: "keauhou",
@@ -434,6 +580,10 @@ export const locations: Location[] = [
     neighborhoods: ["Keauhou Resort area", "Keauhou Mauka", "Kahaluʻu-side"],
     landmarks: ["Keauhou Bay", "Outrigger Keauhou Beach", "Manta ray dive sites"],
     roads: ["Aliʻi Drive", "Highway 11", "Keauhou Pkwy"],
+    routedTo: ["west-organics", "west-landfill"],
+    localNotes:
+      "Keauhou is the resort + residential community south of Kailua-Kona along Aliʻi Drive — beautiful homes, the Keauhou Resort, and the manta ray night-dive bay. Scheduled Kona-side days.",
+    responseTime: "Scheduled — typically 2-3 days",
   },
   {
     slug: "waikoloa-village",
@@ -448,6 +598,10 @@ export const locations: Location[] = [
     neighborhoods: ["Waikoloa Village", "Waikoloa Heights", "Waikoloa Highlands"],
     landmarks: ["Waikoloa Stables", "Highway 190 corridor", "Mauna Kea views"],
     roads: ["Highway 190 (Māmalahoa Hwy)", "Waikoloa Road"],
+    routedTo: ["west-organics", "west-landfill"],
+    localNotes:
+      "Waikoloa Village is a 6-mile-inland residential community above the resort coast — distinct from Waikoloa Beach Resort. Reached via Hwy 190 / Waikoloa Road. Our HGTV Renovation Aloha demolition was here (S2 E4).",
+    responseTime: "Scheduled — typically 2-3 days",
   },
   {
     slug: "waikoloa-beach-resort",
@@ -461,7 +615,11 @@ export const locations: Location[] = [
       "Waikoloa Beach Resort is the resort coast — Anaeho'omalu Bay, Kings' Shops, Queens' MarketPlace, plus the surrounding condo and timeshare communities. We handle condo cleanouts, contractor debris, and resort-side projects on scheduled days.",
     neighborhoods: ["Anaeho'omalu (A-Bay)", "Mauna Lani-side", "Kohala by the Sea", "Kings' Land"],
     landmarks: ["'Anaeho'omalu Bay", "Kings' Shops", "Queens' MarketPlace", "Mauna Lani Resort"],
-    roads: ["Highway 19", "Queen Kaʻahumanu Highway", "Waikoloa Beach Drive"],
+    roads: ["Highway 19 (Queen Kaʻahumanu Hwy)", "Waikoloa Beach Drive"],
+    routedTo: ["west-organics", "west-landfill"],
+    localNotes:
+      "Waikoloa Beach Resort is the coastal resort area off Queen Kaʻahumanu Highway — distinct from Waikoloa Village 6 miles inland. We handle condo cleanouts, contractor debris, and resort-side projects on scheduled Kohala days.",
+    responseTime: "Scheduled — typically 2-3 days",
   },
   {
     slug: "puako",
@@ -475,7 +633,11 @@ export const locations: Location[] = [
       "Puakō is the quiet residential coast just south of Hāpuna Beach — narrow lanes, old homes, and one of the best snorkel coasts on the island. We service Puakō, the Hāpuna and Mauna Kea resorts on Kohala-side runs.",
     neighborhoods: ["Puakō", "Mauna Lani-side", "Mauna Kea Resort area"],
     landmarks: ["Hāpuna Beach State Park", "Puakō petroglyphs", "Mauna Kea Beach"],
-    roads: ["Puakō Beach Drive", "Highway 19", "Queen Kaʻahumanu Highway"],
+    roads: ["Puakō Beach Drive", "Highway 19 (Queen Kaʻahumanu Hwy)"],
+    routedTo: ["west-organics", "west-landfill"],
+    localNotes:
+      "Puakō is the quiet residential coast just south of Hāpuna Beach — narrow lanes, older homes. We service Puakō, Hāpuna and Mauna Kea resort properties on scheduled Kohala-side runs.",
+    responseTime: "Scheduled — typically 2-3 days",
   },
 
   // ────────────── SOUTH HAWAIʻI ──────────────
@@ -492,6 +654,10 @@ export const locations: Location[] = [
     neighborhoods: ["Nāʻālehu Town", "Waiʻōhinu", "Discovery Harbour"],
     landmarks: ["Punaluʻu Black Sand Beach", "Southernmost town in USA", "South Point (Ka Lae)"],
     roads: ["Highway 11 (Hawaii Belt Road)", "South Point Road"],
+    routedTo: ["west-landfill"],
+    localNotes:
+      "Nāʻālehu is the southernmost town in the United States — agricultural Kaʻū coast off Hwy 11 / South Point Road. A long haul from Hilo (90+ minutes), so we batch Kaʻū jobs on scheduled days.",
+    responseTime: "Scheduled days only",
   },
   {
     slug: "ocean-view",
@@ -506,6 +672,10 @@ export const locations: Location[] = [
     neighborhoods: ["Hawaiian Ocean View Estates (HOVE)", "HOVE Ranchos", "Ocean View Village"],
     landmarks: ["South Point Road", "Mauna Loa southern slope", "Lava fields"],
     roads: ["Highway 11 (Hawaii Belt Road)", "Hawaii Ocean View Road"],
+    routedTo: ["west-landfill"],
+    localNotes:
+      "HOVE is a massive 1-acre-lot subdivision sprawling across Mauna Loa's southern slope on lava-rock substrate — lots of off-grid homes, lava-field landscaping, strong DIY community. Long haul from Hilo, so we run Kaʻū on scheduled days.",
+    responseTime: "Scheduled days only",
   },
   {
     slug: "pahala",
@@ -520,6 +690,10 @@ export const locations: Location[] = [
     neighborhoods: ["Pāhala Town", "Wood Valley", "Pāhala-mauka"],
     landmarks: ["Punaluʻu Black Sand Beach (nearby)", "Kaʻū Coffee Mill", "Wood Valley Temple"],
     roads: ["Highway 11 (Hawaii Belt Road)", "Wood Valley Road"],
+    routedTo: ["west-landfill"],
+    localNotes:
+      "Pāhala is the old sugar-plantation town in Kaʻū — agricultural lands, coffee country, with Wood Valley climbing up toward Mauna Loa. A long haul from Hilo on Hwy 11, so we service it on scheduled Kaʻū days.",
+    responseTime: "Scheduled days only",
   },
 ];
 

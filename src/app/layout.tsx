@@ -4,7 +4,8 @@ import "./globals.css";
 import { Header } from "@/components/site/header";
 import { Footer } from "@/components/site/footer";
 import { StickyMobileCTA } from "@/components/site/sticky-cta";
-import { LocalBusinessJsonLd } from "@/components/site/json-ld";
+import { JsonLd } from "@/components/schema/JsonLd";
+import { localBusinessSchema, SITE_URL } from "@/lib/schema";
 import { site } from "@/lib/site";
 
 const inter = Inter({
@@ -20,8 +21,10 @@ const manrope = Manrope({
   weight: ["500", "600", "700", "800"],
 });
 
+const OG_IMAGE = `${SITE_URL}/images/og-default.jpg`;
+
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: `${site.name} | Junk Removal, Demolition & Dumpsters on Hawaiʻi Island`,
     template: `%s | ${site.name}`,
@@ -47,17 +50,17 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${site.name} — ${site.tagline}`,
     description: site.description,
-    url: site.url,
+    url: SITE_URL,
     siteName: site.name,
     locale: "en_US",
     type: "website",
-    images: [{ url: "/images/og-default.jpg", width: 1200, height: 630, alt: site.name }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: site.name }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name} — ${site.tagline}`,
     description: site.description,
-    images: ["/images/og-default.jpg"],
+    images: [OG_IMAGE],
   },
   robots: {
     index: true,
@@ -77,11 +80,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${inter.variable} ${manrope.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white text-(--color-ocean-800)">
+        <JsonLd id="ld-localbusiness" data={localBusinessSchema()} />
         <Header />
         <main className="flex-1 pb-20 lg:pb-0">{children}</main>
         <Footer />
         <StickyMobileCTA />
-        <LocalBusinessJsonLd />
       </body>
     </html>
   );

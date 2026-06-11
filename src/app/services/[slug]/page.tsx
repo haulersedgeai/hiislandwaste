@@ -9,6 +9,8 @@ import { QuoteForm } from "@/components/site/quote-form";
 import { services, getService } from "@/content/services";
 import { testimonials } from "@/content/testimonials";
 import { site } from "@/lib/site";
+import { JsonLd } from "@/components/schema/JsonLd";
+import { serviceSchema, breadcrumbSchema } from "@/lib/schema";
 
 export const dynamicParams = false;
 
@@ -52,6 +54,15 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
+      <JsonLd id={`ld-service-${service.slug}`} data={serviceSchema(service)} />
+      <JsonLd
+        id={`ld-breadcrumb-${service.slug}`}
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Services", url: "/services" },
+          { name: service.title, url: `/services/${service.slug}` },
+        ])}
+      />
       <PageHero
         eyebrow={service.isHub ? "Service" : "Specialty Service"}
         title={service.h1}

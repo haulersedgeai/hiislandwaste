@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.hiislandwaste.com
+Host: https://hiislandwaste.vercel.app
 
 # Sitemaps
-Sitemap: https://www.hiislandwaste.com/sitemap.xml
+Sitemap: https://hiislandwaste.vercel.app/sitemap.xml

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { PageHero, CTASection } from "@/components/site/sections";
 import { faqs, faqsByCategory } from "@/content/faq";
+import { JsonLd } from "@/components/schema/JsonLd";
+import { faqSchema, breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "FAQ — Common Questions About Junk Removal, Demolition & Dumpsters",
@@ -22,27 +24,20 @@ const CATEGORY_TITLES: Record<string, string> = {
 const CATEGORY_ORDER = ["general", "items", "process", "pricing", "service-area", "insurance"] as const;
 
 export default function FAQPage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
-
   return (
     <>
+      <JsonLd id="ld-faq" data={faqSchema(faqs)} />
+      <JsonLd
+        id="ld-breadcrumb-faq"
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "FAQ", url: "/faq" },
+        ])}
+      />
       <PageHero
         eyebrow="FAQ"
         title="Common questions, straight answers."
         subtitle="Don't see your question? Call us — Mon–Sun, 7am–8pm. We'd rather talk than have you guess."
-      />
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       <section className="py-12 md:py-16 bg-white">

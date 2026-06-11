@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, Phone, MapPin, Route, Landmark } from "lucide-react";
+import { ArrowRight, Phone, MapPin, Route, Landmark, Truck, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { PageHero, CTASection, LocationCard, ServiceCard, TestimonialCard } from "@/components/site/sections";
 import { QuoteForm } from "@/components/site/quote-form";
-import { locations, regions, getLocation, type Region } from "@/content/locations";
+import { locations, regions, getLocation, FACILITY_DETAILS, type Region, type Location } from "@/content/locations";
 import { serviceHubs } from "@/content/services";
 import { testimonials } from "@/content/testimonials";
 import { site } from "@/lib/site";
+import { JsonLd } from "@/components/schema/JsonLd";
+import { breadcrumbSchema, locationServiceSchema } from "@/lib/schema";
 
 const REGION_SLUGS: Region[] = ["east-hawaii", "north-hawaii", "west-hawaii", "south-hawaii"];
 
@@ -60,6 +62,14 @@ function RegionView({ region }: { region: Region }) {
 
   return (
     <>
+      <JsonLd
+        id={`ld-breadcrumb-region-${region}`}
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Service Area", url: "/service-area" },
+          { name: r.name, url: `/service-area/${region}` },
+        ])}
+      />
       <PageHero
         eyebrow="Region"
         title={`${r.name} — ${r.tagline}`}
@@ -131,6 +141,16 @@ function LocationView({ slug }: { slug: string }) {
 
   return (
     <>
+      <JsonLd
+        id={`ld-breadcrumb-${loc.slug}`}
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Service Area", url: "/service-area" },
+          { name: r.name, url: `/service-area/${loc.region}` },
+          { name: loc.name, url: `/service-area/${loc.slug}` },
+        ])}
+      />
+      <JsonLd id={`ld-service-area-${loc.slug}`} data={locationServiceSchema(loc)} />
       <PageHero
         eyebrow={`${r.name} · Service Area`}
         title={`Junk Removal & Demolition in ${loc.name}`}
@@ -187,10 +207,46 @@ function LocationView({ slug }: { slug: string }) {
             {loc.roads.length > 0 && (
               <div className="mt-6 rounded-xl border border-(--color-sand-200) bg-(--color-sand-50) p-5">
                 <div className="flex items-center gap-2 text-(--color-volcano-500) font-bold text-sm uppercase tracking-wider">
-                  <Route className="size-4" /> Roads we work
+                  <Route className="size-4" /> Roads we run
                 </div>
                 <p className="mt-2 text-(--color-ocean-700)">{loc.roads.join(" · ")}</p>
               </div>
+            )}
+
+            {(loc.localNotes || loc.routedTo) && (
+              <section className="mt-12">
+                <h3 className="font-display font-extrabold text-2xl text-(--color-ocean-800)">
+                  What to know about cleanouts in {loc.name}
+                </h3>
+                {loc.localNotes && (
+                  <p className="mt-3 text-(--color-ocean-700)/90 leading-relaxed">
+                    {loc.localNotes}
+                  </p>
+                )}
+
+                {loc.routedTo && loc.routedTo.length > 0 && (
+                  <div className="mt-5 rounded-xl border border-(--color-sand-200) bg-white p-5">
+                    <div className="flex items-center gap-2 text-(--color-volcano-500) font-bold text-sm uppercase tracking-wider">
+                      <Truck className="size-4" /> How we route the load
+                    </div>
+                    <p className="mt-3 text-(--color-ocean-700)/90 leading-relaxed">
+                      {routingNarrative(loc)}
+                    </p>
+                  </div>
+                )}
+
+                {loc.responseTime && (
+                  <div className="mt-4 rounded-xl border border-(--color-sand-200) bg-(--color-sand-50) p-5">
+                    <div className="flex items-center gap-2 text-(--color-volcano-500) font-bold text-sm uppercase tracking-wider">
+                      <Clock className="size-4" /> Response time
+                    </div>
+                    <p className="mt-2 text-(--color-ocean-700)">
+                      <strong className="font-display text-(--color-ocean-800)">{loc.responseTime}.</strong>{" "}
+                      {responseNarrative(loc)}
+                    </p>
+                  </div>
+                )}
+              </section>
             )}
 
             <h3 className="mt-14 font-display font-extrabold text-2xl text-(--color-ocean-800)">
@@ -261,6 +317,46 @@ function LocationView({ slug }: { slug: string }) {
       <CTASection />
     </>
   );
+}
+
+function routingNarrative(loc: Location): string {
+  const routes = loc.routedTo ?? [];
+  const general = routes.filter((f) => f !== "west-landfill");
+  const hasLandfill = routes.includes("west-landfill");
+
+  const sentences: string[] = [];
+
+  if (general.length > 0) {
+    const parts = general.map((f) => {
+      const d = FACILITY_DETAILS[f];
+      return `${d.name} (${d.place}) — ${d.description}`;
+    });
+    sentences.push(
+      `General loads from ${loc.name} route to ${parts.join("; and ")}.`
+    );
+  }
+
+  if (hasLandfill) {
+    sentences.push(
+      `Construction & demolition material from ${loc.name} we haul to the West Hawaiʻi Sanitary Landfill at Puʻuanahulu, per Hawaiʻi County rules — that destination is required for all C&D and grading & grubbing debris regardless of where the job is.`
+    );
+  }
+
+  sentences.push("We handle the manifests, the tipping fees and the disposal paperwork.");
+  return sentences.join(" ");
+}
+
+function responseNarrative(loc: Location): string {
+  switch (loc.responseTime) {
+    case "Same-day or next-day":
+      return "Our base is in Hilo, so east-side jobs almost always fit a same-day or next-day window.";
+    case "Scheduled — typically 2-3 days":
+      return "The drive from Hilo means we batch this area on scheduled runs — usually within 2–3 days of your quote.";
+    case "Scheduled days only":
+      return "It's a long haul from our Hilo base, so we run this area on scheduled days. Ask us about the next run when you call.";
+    default:
+      return "Call us and we'll match a window to your job.";
+  }
 }
 
 function mapLocationDefault(slug: string): string | undefined {

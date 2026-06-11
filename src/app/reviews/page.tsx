@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Star } from "lucide-react";
 import { PageHero, CTASection, TestimonialCard } from "@/components/site/sections";
 import { testimonials } from "@/content/testimonials";
+import { JsonLd } from "@/components/schema/JsonLd";
+import { reviewsPageSchema, breadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Reviews — What Our HIW 'Ohana Are Saying",
@@ -13,6 +15,14 @@ export const metadata: Metadata = {
 export default function ReviewsPage() {
   return (
     <>
+      <JsonLd id="ld-reviews-list" data={reviewsPageSchema(testimonials)} />
+      <JsonLd
+        id="ld-breadcrumb-reviews"
+        data={breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Reviews", url: "/reviews" },
+        ])}
+      />
       <PageHero
         eyebrow="Reviews"
         title="See what our HIW 'Ohana are saying."

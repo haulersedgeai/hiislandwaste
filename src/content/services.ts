@@ -275,12 +275,15 @@ export const services: Service[] = [
     intro: [
       "When it's time to clear the way for something new, our demolition services in Hilo and across Hawai'i Island make the process smooth. From small residential tear-outs to larger structural projects, we handle everything with precision and respect for your property — and for the island we call home.",
       "We specialize in light to mid-scale demolition: sheds, decks, kitchens, bathrooms, hot tubs, garages, fences, and more. Every project leaves the site swept and load-out ready for your next phase.",
+      "Where the debris goes — all construction & demolition (C&D) and grading & grubbing (G&G) waste from any Hawaiʻi Island job is hauled to the West Hawaiʻi Sanitary Landfill at Puʻuanahulu, as required by Hawaiʻi County rules. Loads over 50 cubic yards we notify the landfill 24 hours in advance. We handle the permitting, the manifests, and the tipping fees so you never have to think about it.",
     ],
     whatsIncluded: [
       "Free written estimates",
-      "Licensed and $2M liability insured",
+      "Licensed with $2M general liability + crew coverage",
       "DOT-compliant trucks and load securement",
-      "On-site sorting for recycling and reuse",
+      "On-site sorting for recycling and reuse before haul-off",
+      "All C&D and G&G debris routed to the West Hawaiʻi Sanitary Landfill (Puʻuanahulu) per County rules",
+      "Permits, manifests and tipping fees handled by us",
       "Daily cleanup to keep the job site safe",
       "HGTV Renovation Aloha experience (S2 E4)",
     ],
