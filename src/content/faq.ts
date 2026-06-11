@@ -5,6 +5,7 @@ export interface FAQ {
 }
 
 export const faqs: FAQ[] = [
+  // ───────────────── GENERAL ─────────────────
   {
     category: "general",
     q: "What does Hawaii Island Waste do?",
@@ -12,28 +13,72 @@ export const faqs: FAQ[] = [
   },
   {
     category: "general",
-    q: "Are you licensed and insured?",
-    a: "Yes. We carry a $2 Million Liability Policy, every member of our crew is fully insured, and we are DOT compliant — our trucks and drivers meet Department of Transportation safety standards with regular inspections and proper load securement.",
+    q: "Where is Hawaii Island Waste based?",
+    a: "Our base is in Hilo on the east side of Hawaiʻi Island. Operating hours are Monday through Sunday, 7am to 8pm. We service the entire island (Hawaiʻi County) — east-side jobs are usually same-day or next-day, while Kona, Kohala and Kaʻū jobs run on scheduled days.",
+  },
+  {
+    category: "general",
+    q: "Are you locally owned?",
+    a: "Yes. Hawaii Island Waste was founded October 5, 2021 by Sherman 'Naea' and Chae Kaopua during the pandemic, and it's still family-owned and operated. The company was featured on HGTV's Renovation Aloha (Season 2, Episode 4) for a Waikoloa Village demolition.",
+  },
+  {
+    category: "general",
+    q: "Do you serve the whole Big Island or just Hilo?",
+    a: "Whole island. The east side — Hilo, Puna, and Hāmākua south of Honokaʻa — is our home territory and runs same-day or next-day in most cases. North Kohala, Waimea, Kona side and Kaʻū are scheduled-day runs, typically within 2-3 days.",
   },
   {
     category: "general",
     q: "Who actually shows up?",
     a: "Our trained, uniformed crew — not random subcontractors. The business was started by Sherman 'Naea' and Chae Kaopua in 2021 and grew from a single family truck. Naea or one of our lead crew members manages every job.",
   },
+
+  // ───────────────── ITEMS ─────────────────
   {
     category: "items",
-    q: "What kind of \"junk\" do you actually take?",
-    a: "Almost anything. We handle old furniture, appliances, electronics (e-waste), mattresses, yard waste, construction debris, hot tubs, sheds, decks, and more. If it's taking up space and it isn't hazardous, we can likely haul it away.",
+    q: "What items do you take?",
+    a: "Almost everything — furniture, appliances, mattresses, TVs and e-waste, hot tubs, sheds, decks, fences, construction debris, yard and green waste, estate-cleanout contents, and hoarder cleanouts. See our full Items We Take page for the detailed list. We donate or recycle whatever we can before sending the rest to the proper Hawaiʻi County facility.",
   },
   {
     category: "items",
-    q: "Is there anything you cannot take?",
-    a: "To keep our team safe and protect the ʻāina, we cannot haul liquid hazardous materials. This includes: liquid paint (oil-based or latex that hasn't been dried out), and automotive fluids (gasoline, engine oil, transmission fluid, antifreeze). Tires are case-by-case — ask us when you call.",
+    q: "Do you take green waste / yard waste?",
+    a: "Yes. Tree limbs, palm fronds, brush, hedge clippings, storm debris — we haul it. Green waste from our jobs routes to the East Hawaiʻi Organics Facility in Hilo or the West Hawaiʻi Organics Facility in Puʻuanahulu, where it's composted into mulch rather than landfilled.",
+  },
+  {
+    category: "items",
+    q: "Do you take e-waste, TVs, and old electronics?",
+    a: "Yes. E-waste is banned from Hawaiʻi County landfills, so we route TVs (CRT, LCD, plasma, flat-panel), computers, monitors, printers and small electronics through proper recycling channels. Just point at the pile.",
+  },
+  {
+    category: "items",
+    q: "Do you take appliances with refrigerant (fridges, AC units, freezers)?",
+    a: "Yes. Refrigerant-containing appliances — refrigerators, freezers, window AC units, mini-splits, wine coolers — require special handling under federal and state rules. We route them properly so they're not landfilled with the rest.",
+  },
+  {
+    category: "items",
+    q: "What about hazardous materials, paint, chemicals, asbestos?",
+    a: "No — those need specialized handling we're not licensed for. For paint and chemicals, the County of Hawaiʻi's household hazardous waste (HHW) collection events are the right route. For asbestos (common in pre-1980 structures on Hawaiʻi Island), you'll need a licensed abatement contractor first; we can come in after for the cleared debris.",
+  },
+  {
+    category: "items",
+    q: "Do you take tires and car batteries?",
+    a: "Tires and lead-acid batteries are landfill-banned in Hawaiʻi. We can usually take them but may charge a small handling fee since they have to be routed to specific recycling facilities. Ask when you call so we can quote it right.",
   },
   {
     category: "items",
     q: "Where does my junk actually go?",
-    a: "We don't just head straight to the landfill. We prioritize donating usable items to local charities and routing recyclables (metals, e-waste, green waste, cardboard) to proper handlers whenever possible. What's left goes to legal disposal at appropriate facilities.",
+    a: "We don't just head straight to the landfill. We prioritize donating usable items to local charities and routing recyclables (metals, e-waste, green waste, cardboard) to proper handlers whenever possible. General loads route to the East Hawaiʻi Regional Sort Station in Hilo or the West Hawaiʻi Sanitary Landfill at Puʻuanahulu; all construction and demolition debris is required by Hawaiʻi County to go to Puʻuanahulu.",
+  },
+
+  // ───────────────── PROCESS ─────────────────
+  {
+    category: "process",
+    q: "How does it work?",
+    a: "Five steps. (1) Request a quote — call, text photos, or use the form. (2) We confirm scope and schedule a window. (3) Our crew arrives in the window we agreed on. (4) You point — we do the rest. (5) We sweep up, you sign off, and we route everything to the right facility.",
+  },
+  {
+    category: "process",
+    q: "Do I need to be home?",
+    a: "No, as long as we can access the items and you have payment info on file. Many of our estate-cleanout and realtor clients are off-island — we coordinate by phone, text and photo and send confirmation pictures when the job is done.",
   },
   {
     category: "process",
@@ -42,43 +87,84 @@ export const faqs: FAQ[] = [
   },
   {
     category: "process",
-    q: "How does the process work?",
-    a: "Three steps: (1) Contact us for a free estimate by phone, text, photo or on-site walk-through. (2) Pick a scheduling window that works for you. (3) Our crew arrives on time, you show us what stays and what goes, and we handle the rest — loading, hauling, sweeping up.",
+    q: "How fast can you come?",
+    a: "Hilo and east-side Puna jobs are usually same-day or next-day. Kona side, North Kohala, Waimea and Kaʻū are scheduled runs — typically within 2-3 days. The fastest way to lock in a window is to call 808-300-9766.",
   },
   {
     category: "process",
-    q: "Do you offer same-day or next-day service?",
-    a: "Often yes, especially for jobs in Hilo, Keaʻau, Puna and the lower Hāmākua coast. Call us and we'll check the schedule. Larger projects and Kona-side work usually need a bit more notice.",
+    q: "How much notice do you need for a dumpster?",
+    a: "24-48 hours for east-side delivery in most cases; longer for Kona side and Kaʻū. We size the dumpster to the job — there's no point renting more than you need, and we can swap or pull as soon as you're done.",
   },
   {
     category: "process",
-    q: "Do you offer free estimates?",
-    a: "Always. You can send a photo by text, describe the project over the phone, or have us swing by for an on-site walk-through. No obligation, no pressure.",
+    q: "How big are your dumpsters?",
+    a: "We offer multiple roll-off sizes from 10 to 30 cubic yards. We'll recommend based on the job — a kitchen remodel is different from a full property cleanout, and a dumpster that's too small means a second haul fee you didn't need.",
+  },
+
+  // ───────────────── PRICING ─────────────────
+  {
+    category: "pricing",
+    q: "How much does junk removal cost on the Big Island?",
+    a: "Pricing is volume-based — what fits in our truck, not what's in it. We have an honest minimum for a single-item pickup that scales up by truck-load. You get a firm written quote before we start, so there are no surprises. Call or text photos to 808-300-9766 for the fastest quote.",
   },
   {
     category: "pricing",
-    q: "How much does it cost?",
-    a: "Pricing is generally based on volume — how much space your items take up in our truck — plus any complicating factors like demolition, hot tub disassembly, or multi-floor carries. Every job is unique, so we offer free, no-obligation estimates. Photo quotes work great for smaller jobs.",
+    q: "Are estimates really free?",
+    a: "Yes. We give written estimates with no obligation. Photo quotes work great for smaller jobs; for larger projects we'll come walk the site at no charge.",
   },
   {
     category: "pricing",
-    q: "Do you charge extra for stairs, basements or distance?",
-    a: "Not for normal residential stairs or carries. If the job is unusually long-distance from the truck or involves heavy multi-floor work, we'll mention it in your quote so there are no surprises.",
+    q: "What does demolition cost?",
+    a: "Demolition pricing varies widely based on structure type, size, and disposal volume. All C&D debris from our jobs is required to be hauled to the West Hawaiʻi Sanitary Landfill at Puʻuanahulu (Hawaiʻi County rule), so tipping fees factor into the quote. Permits, manifests and tipping fees are all included up front — you don't get a surprise bill.",
+  },
+  {
+    category: "pricing",
+    q: "Do you charge extra for stairs, long carries, or difficult access?",
+    a: "Sometimes — long approach drives in HPP, steep Kaumana lots, or multi-flight stairs can add time. When they do, we tell you up front in the quote, not after the fact. Normal residential stairs and carries are included.",
   },
   {
     category: "pricing",
     q: "Do you accept credit cards?",
     a: "Yes — cash, card, check, and Venmo are all accepted. Payment is on completion when you've signed off on the job.",
   },
+
+  // ───────────────── SERVICE AREA ─────────────────
   {
     category: "service-area",
     q: "What areas do you serve?",
-    a: "Our home base is Hilo, and we serve all of Hawaiʻi Island. Our most regular service area is east Hawaiʻi — Hilo, Keaʻau, Pāhoa, Puna, Volcano, Mountain View, and the lower Hāmākua coast. We also cover the north (Honokaʻa, Waimea, Hāwī, Kapaʻau), the west / Kona side, and Kaʻū on scheduled days. Larger projects on the Kona side may have project minimums.",
+    a: "Our home base is Hilo, and we serve all of Hawaiʻi Island. Our most regular service area is east Hawaiʻi — Hilo, Keaʻau, Pāhoa, Puna, Volcano, Mountain View and the lower Hāmākua coast. We also cover the north (Honokaʻa, Waimea, Hāwī, Kapaʻau), the west / Kona side, and Kaʻū on scheduled days.",
   },
   {
     category: "service-area",
-    q: "Do you really go all the way to Kona / Waikoloa / Kaʻū?",
-    a: "Yes — but on scheduled days. The drive from Hilo to Kona is roughly 2 hours via Saddle Road and 3 via the belt. For Kona-side, Waikoloa or Kaʻū work, ask about our scheduled days and minimums when you call. We've worked across the whole island, including a Waikoloa Village project featured on HGTV's Renovation Aloha.",
+    q: "Do you service Waimea, Kona, Volcano or Ocean View?",
+    a: "Yes — we service the entire island. Our base is in Hilo so the east side is same-day or next-day; Waimea, Kona side and Ocean View (HOVE) run on scheduled days, typically 2-3 days out. Check the Service Area page for response-time notes per town.",
+  },
+  {
+    category: "service-area",
+    q: "Do you service the resort areas (Waikoloa Beach, Mauna Lani, Hāpuna)?",
+    a: "Yes — we handle condo cleanouts, vacation-rental turnovers, contractor debris and resort-side projects on scheduled Kohala-side days. We're familiar with the gate access and HOA staging rules for the major properties along Queen Kaʻahumanu Highway.",
+  },
+  {
+    category: "service-area",
+    q: "Why does Kona side take longer than Hilo?",
+    a: "We're based in Hilo, and Kona is about 2 hours via Saddle Road (Daniel K. Inouye Hwy) or nearly 3 via the Belt Road. Rather than racing across the island for one job, we batch Kona-side projects on scheduled runs — better for you, better for the equipment, better for the price.",
+  },
+
+  // ───────────────── INSURANCE ─────────────────
+  {
+    category: "insurance",
+    q: "Are you licensed and insured?",
+    a: "Yes. We carry a $2M general liability policy plus crew coverage. Our trucks and drivers are DOT-compliant with regular inspections and proper load securement. We'll send proof of insurance on request.",
+  },
+  {
+    category: "insurance",
+    q: "What if something gets damaged during the job?",
+    a: "Our liability coverage handles property damage caused by our crew. We've never had a claim, but the protection is there — that's the whole point of carrying a real policy rather than the bare-minimum coverage some haulers skate by on.",
+  },
+  {
+    category: "insurance",
+    q: "Do you need a permit to demolish a structure in Hawaiʻi County?",
+    a: "Most demolition work requires a Hawaiʻi County demolition permit through the Department of Public Works. For structures built before 1980, an asbestos survey is also required before the permit will be issued. We handle the permitting on demolition projects we do — you don't have to figure it out.",
   },
   {
     category: "insurance",
