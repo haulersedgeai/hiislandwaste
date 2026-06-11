@@ -25,6 +25,7 @@ export function Header() {
   }, [open]);
 
   return (
+    <>
     <header
       className={cn(
         "sticky top-0 z-50 w-full transition-all",
@@ -87,10 +88,48 @@ export function Header() {
           </button>
         </div>
       </div>
+    </header>
 
-      {open && (
-        <div className="lg:hidden fixed inset-x-0 top-16 md:top-20 bottom-0 z-40 bg-white overflow-y-auto">
+    {open && (
+      <div className="lg:hidden">
+        <button
+          type="button"
+          aria-label="Close menu"
+          onClick={() => setOpen(false)}
+          className="fixed inset-0 z-40 bg-(--color-ocean-900)/60"
+        />
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 bg-white overflow-y-auto"
+        >
           <div className="container-x py-6">
+            <div className="flex items-center justify-between mb-4">
+              <Link
+                href="/"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-3"
+              >
+                <Image
+                  src="/images/logo.png"
+                  alt="Hawaii Island Waste"
+                  width={40}
+                  height={40}
+                  className="size-10 rounded-full"
+                />
+                <span className="font-display font-extrabold text-(--color-ocean-800) text-base tracking-tight">
+                  Hawaii Island Waste
+                </span>
+              </Link>
+              <button
+                type="button"
+                aria-label="Close menu"
+                onClick={() => setOpen(false)}
+                className="inline-flex size-10 items-center justify-center rounded-md text-(--color-ocean-800) hover:bg-(--color-sand-100)"
+              >
+                <X className="size-6" />
+              </button>
+            </div>
             <nav className="flex flex-col">
               {primaryNav.map((item) => (
                 <Link
@@ -127,7 +166,8 @@ export function Header() {
             </div>
           </div>
         </div>
-      )}
-    </header>
+      </div>
+    )}
+    </>
   );
 }
