@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/site/header";
 import { Footer } from "@/components/site/footer";
 import { StickyMobileCTA } from "@/components/site/sticky-cta";
+import BinBossModal from "@/components/BinBossModal";
 import { JsonLd } from "@/components/schema/JsonLd";
 import { localBusinessSchema, SITE_URL } from "@/lib/schema";
 import { site } from "@/lib/site";
@@ -85,6 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="flex-1 pb-20 lg:pb-0">{children}</main>
         <Footer />
         <StickyMobileCTA />
+        <BinBossModal />
       </body>
     </html>
   );

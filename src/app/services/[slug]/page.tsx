@@ -11,6 +11,13 @@ import { getTestimonialsForService } from "@/content/testimonials";
 import { site } from "@/lib/site";
 import { JsonLd } from "@/components/schema/JsonLd";
 import { serviceSchema, breadcrumbSchema } from "@/lib/schema";
+import {
+  BIN_SPEC,
+  PRICE_TIERS,
+  DISPOSAL_FEES,
+  PRICING_NOTES,
+  DISPOSAL_DISCLAIMER,
+} from "@/content/binPricing";
 
 export const dynamicParams = false;
 
@@ -143,8 +150,15 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               </>
             )}
 
+            {service.slug === "dumpster-rentals" && <BinPricingSection />}
+
             <div className="mt-10 flex flex-wrap gap-3">
-              <Button asChild size="lg">
+              {service.slug === "dumpster-rentals" && (
+                <Button size="lg" type="button">
+                  RENT A DUMPSTER <ArrowRight className="size-4" />
+                </Button>
+              )}
+              <Button asChild size="lg" variant={service.slug === "dumpster-rentals" ? "secondary" : "primary"}>
                 <Link href="/get-a-quote">Get A Free Quote <ArrowRight className="size-4" /></Link>
               </Button>
               <Button asChild variant="outline" size="lg">
@@ -195,6 +209,97 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
       <CTASection />
     </>
+  );
+}
+
+function BinPricingSection() {
+  return (
+    <section className="mt-12" aria-labelledby="bin-pricing-heading">
+      <h2
+        id="bin-pricing-heading"
+        className="font-display font-extrabold text-2xl md:text-3xl text-(--color-ocean-800)"
+      >
+        Bin Rental Pricing
+      </h2>
+      <p className="mt-2 text-(--color-ocean-700)/85">
+        Published flat-rate pricing for our {BIN_SPEC.size} bin, {BIN_SPEC.rentalDays}-day rental.
+        Each tier covers a service area — disposal fees are billed separately at the exact tonnage.
+      </p>
+
+      <div className="mt-6 grid sm:grid-cols-2 gap-4">
+        {PRICE_TIERS.map((tier) => (
+          <div
+            key={tier.startsAt}
+            className="rounded-xl border border-(--color-sand-200) bg-(--color-sand-50) p-5"
+          >
+            <div className="flex items-baseline justify-between gap-3">
+              <div>
+                <div className="text-xs font-bold uppercase tracking-wider text-(--color-volcano-500)">
+                  Starts at
+                </div>
+                <div className="mt-1 font-display font-extrabold text-3xl text-(--color-ocean-800)">
+                  ${tier.startsAt}
+                </div>
+                <div className="text-sm text-(--color-ocean-700)/75">+ disposal fee</div>
+              </div>
+              <div className="text-right text-xs text-(--color-ocean-700)/70">
+                {BIN_SPEC.size}
+                <br />
+                {BIN_SPEC.rentalDays}-day rental
+              </div>
+            </div>
+            <div className="mt-4 pt-4 border-t border-(--color-sand-200)">
+              <div className="text-xs font-bold uppercase tracking-wider text-(--color-ocean-700)/70">
+                Service area
+              </div>
+              <div className="mt-1.5 text-sm text-(--color-ocean-700)">
+                {tier.towns.join(" · ")}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h3 className="mt-10 font-display font-extrabold text-xl text-(--color-ocean-800)">
+        Disposal Fees (County of Hawaiʻi)
+      </h3>
+      <p className="mt-2 text-(--color-ocean-700)/85 text-sm">
+        Charged in addition to the rental price, at exact tonnage when we offload at the county facility.
+      </p>
+      <div className="mt-4 overflow-hidden rounded-xl border border-(--color-sand-200)">
+        <table className="w-full text-sm">
+          <thead className="bg-(--color-sand-100) text-(--color-ocean-800)">
+            <tr>
+              <th className="px-4 py-2.5 text-left font-display font-bold">Material</th>
+              <th className="px-4 py-2.5 text-right font-display font-bold">Rate</th>
+            </tr>
+          </thead>
+          <tbody className="bg-white">
+            {DISPOSAL_FEES.map((fee) => (
+              <tr key={fee.material} className="border-t border-(--color-sand-200)">
+                <td className="px-4 py-2.5 text-(--color-ocean-700)">{fee.material}</td>
+                <td className="px-4 py-2.5 text-right font-semibold text-(--color-ocean-800)">
+                  {fee.perTon !== null ? `$${fee.perTon} / ton` : fee.note}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <ul className="mt-6 space-y-2 text-sm text-(--color-ocean-700)">
+        {PRICING_NOTES.map((note) => (
+          <li key={note} className="flex items-start gap-2">
+            <Check className="size-4 shrink-0 mt-0.5 text-(--color-forest-500)" />
+            <span>{note}</span>
+          </li>
+        ))}
+      </ul>
+
+      <p className="mt-4 text-xs leading-relaxed text-(--color-ocean-700)/70">
+        {DISPOSAL_DISCLAIMER}
+      </p>
+    </section>
   );
 }
 

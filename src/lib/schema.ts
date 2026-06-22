@@ -149,6 +149,25 @@ export function localBusinessSchema(): Record<string, unknown> {
 }
 
 export function serviceSchema(service: Service): Record<string, unknown> {
+  const isDumpster = service.slug === "dumpster-rentals";
+  const offer: Record<string, unknown> = {
+    "@type": "Offer",
+    url: `${SITE_URL}/services/${service.slug}`,
+    priceCurrency: "USD",
+    availability: "https://schema.org/InStock",
+  };
+  if (isDumpster) {
+    offer.priceSpecification = {
+      "@type": "PriceSpecification",
+      priceCurrency: "USD",
+      price: 400,
+      minPrice: 400,
+      description:
+        "Starting price for a 15 cubic-yard, 2-day roll-off bin rental on Hawaiʻi Island. Excludes County of Hawaiʻi disposal fees, which are billed separately at exact tonnage.",
+    };
+    offer.description =
+      "15 cubic-yard, 2-day roll-off bin rental. Pricing starts at $400 in the Hilo/Puna core and scales by distance up to $925 Kona-side. Disposal fees billed at exact tonnage.";
+  }
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -162,12 +181,7 @@ export function serviceSchema(service: Service): Record<string, unknown> {
       { "@type": "AdministrativeArea", name: "Hawaiʻi Island" },
     ],
     url: `${SITE_URL}/services/${service.slug}`,
-    offers: {
-      "@type": "Offer",
-      url: `${SITE_URL}/services/${service.slug}`,
-      priceCurrency: "USD",
-      availability: "https://schema.org/InStock",
-    },
+    offers: offer,
   };
 }
 

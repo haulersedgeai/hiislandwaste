@@ -96,9 +96,12 @@ export const faqs: FAQ[] = [
     a: "24-48 hours for east-side delivery in most cases; longer for Kona side and Kaʻū. We size the dumpster to the job — there's no point renting more than you need, and we can swap or pull as soon as you're done.",
   },
   {
+    // TODO(JUSTIN): Client only priced a 15-yard bin. If HIW only rents the
+    // 15-yard, rewrite this answer accordingly. Currently assumes 15-yard is
+    // the standard published size and other sizes are by quote.
     category: "process",
     q: "How big are your dumpsters?",
-    a: "We offer multiple roll-off sizes from 10 to 30 cubic yards. We'll recommend based on the job — a kitchen remodel is different from a full property cleanout, and a dumpster that's too small means a second haul fee you didn't need.",
+    a: "Our standard published bin is a 15 cubic-yard roll-off — the right size for most renovations, garage cleanouts and yard projects. Larger or smaller sizes are available by quote. We'll recommend the right size for your job so you're not paying for a second haul or for capacity you won't use.",
   },
 
   // ───────────────── PRICING ─────────────────
@@ -106,6 +109,11 @@ export const faqs: FAQ[] = [
     category: "pricing",
     q: "How much does junk removal cost on the Big Island?",
     a: "Pricing is volume-based — what fits in our truck, not what's in it. We have an honest minimum for a single-item pickup that scales up by truck-load. You get a firm written quote before we start, so there are no surprises. Call or text photos to 808-300-9766 for the fastest quote.",
+  },
+  {
+    category: "pricing",
+    q: "How much does a dumpster rental cost on the Big Island?",
+    a: "Our standard 15-yard, 2-day bin rental starts at $400 in the Hilo, Puna and Keaʻau core ($400 covers Hilo, Keaʻau, HPP, Kurtistown, Papaʻikou and Pepeʻekeo) and scales up by distance from our Hilo base — $450 for Pāhoa and Mountain View, $525 for the Hāmākua coast and Volcano, $775 for Honokaʻa, Waimea and Kaʻū, $850 for Waikoloa, and $925 for the Kona side. A County of Hawaiʻi disposal fee is charged on top at the exact tonnage offloaded ($154/ton for construction debris and household material, $129/ton for scrap metal, $39/ton for green waste). Additional days beyond the first 2 are $15 per day. Contact us for multiple-bin, military, senior or contractor rates.",
   },
   {
     category: "pricing",

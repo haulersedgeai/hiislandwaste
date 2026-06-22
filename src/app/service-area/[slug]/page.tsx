@@ -12,6 +12,7 @@ import { getTestimonialsForLocation } from "@/content/testimonials";
 import { site } from "@/lib/site";
 import { JsonLd } from "@/components/schema/JsonLd";
 import { breadcrumbSchema, locationServiceSchema } from "@/lib/schema";
+import { getBinPriceForTown } from "@/content/binPricing";
 
 const REGION_SLUGS: Region[] = ["east-hawaii", "north-hawaii", "west-hawaii", "south-hawaii"];
 
@@ -250,6 +251,8 @@ function LocationView({ slug }: { slug: string }) {
               </section>
             )}
 
+            <BinRentalCallout loc={loc} />
+
             <h3 className="mt-14 font-display font-extrabold text-2xl text-(--color-ocean-800)">
               Services available in {loc.name}
             </h3>
@@ -319,6 +322,59 @@ function LocationView({ slug }: { slug: string }) {
 
       <CTASection />
     </>
+  );
+}
+
+function BinRentalCallout({ loc }: { loc: Location }) {
+  const price = getBinPriceForTown(loc.slug);
+  if (price !== null) {
+    return (
+      <div className="mt-12 rounded-xl border-2 border-(--color-volcano-400) bg-(--color-volcano-400)/5 p-5">
+        <div className="flex items-start justify-between gap-4 flex-wrap">
+          <div>
+            <div className="text-xs font-bold uppercase tracking-wider text-(--color-volcano-500)">
+              15-yard bin rental in {loc.name}
+            </div>
+            <div className="mt-1 font-display font-extrabold text-2xl text-(--color-ocean-800)">
+              Starts at ${price}
+              <span className="text-base font-semibold text-(--color-ocean-700)/75">
+                {" "}
+                + disposal
+              </span>
+            </div>
+            <div className="mt-1 text-sm text-(--color-ocean-700)/75">
+              2-day rental · disposal billed at exact tonnage
+            </div>
+          </div>
+          <Link
+            href="/services/dumpster-rentals"
+            className="inline-flex items-center gap-1 text-sm font-bold text-(--color-volcano-500) hover:text-(--color-volcano-600)"
+          >
+            See full bin pricing <ArrowRight className="size-3.5" />
+          </Link>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="mt-12 rounded-xl border border-(--color-sand-200) bg-(--color-sand-50) p-5">
+      <div className="flex items-start justify-between gap-4 flex-wrap">
+        <div>
+          <div className="text-xs font-bold uppercase tracking-wider text-(--color-volcano-500)">
+            Bin rental in {loc.name}
+          </div>
+          <p className="mt-1 text-(--color-ocean-700)">
+            Contact us for bin rental pricing in {loc.name}.
+          </p>
+        </div>
+        <Link
+          href="/get-a-quote"
+          className="inline-flex items-center gap-1 text-sm font-bold text-(--color-volcano-500) hover:text-(--color-volcano-600)"
+        >
+          Get a quote <ArrowRight className="size-3.5" />
+        </Link>
+      </div>
+    </div>
   );
 }
 
