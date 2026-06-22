@@ -56,6 +56,7 @@ const SLUG_PRICE: Record<string, number> = {
 
   // $450 tier — Pāhoa, Hawaiian Beaches, Mountain View
   pahoa: 450,
+  "hawaiian-beaches": 450,
   "mountain-view": 450,
 
   // $525 tier — Hāmākua, Volcano
@@ -63,10 +64,12 @@ const SLUG_PRICE: Record<string, number> = {
   honomu: 525,
   hakalau: 525,
   laupahoehoe: 525,
+  // TODO(JUSTIN): confirm with Naea — Pāʻauilo is geographically near Honokaʻa,
+  // he may want $775 instead of the $525 Hāmākua-district rate.
+  paauilo: 525,
 
   // $775 tier — Honokaʻa, Waimea, Kaʻū
   honokaa: 775,
-  paauilo: 775, // upper Hāmākua near Honokaʻa
   waimea: 775,
   naalehu: 775, // Kaʻū
   "ocean-view": 775, // Kaʻū

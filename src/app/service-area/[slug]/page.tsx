@@ -424,6 +424,7 @@ function mapLocationDefault(slug: string): string | undefined {
     "kaumana": "Kaumana",
     "keaau": "Keaʻau",
     "pahoa": "Pāhoa",
+    "hawaiian-beaches": "Hawaiian Beaches",
     "hawaiian-paradise-park": "Hawaiian Paradise Park",
     "orchidland-estates": "Orchidland",
     "ainaloa": "Ainaloa",

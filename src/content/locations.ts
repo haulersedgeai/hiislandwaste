@@ -168,6 +168,27 @@ export const locations: Location[] = [
     responseTime: "Same-day or next-day",
   },
   {
+    slug: "hawaiian-beaches",
+    name: "Hawaiian Beaches",
+    fullName: "Hawaiian Beaches, HI",
+    region: "east-hawaii",
+    metaTitle: "Junk Removal Hawaiian Beaches HI | Puna Subdivision | Hawaii Island Waste",
+    metaDescription:
+      "Junk removal, demolition and dumpster rentals in Hawaiian Beaches and the lower Puna subdivisions. Free quotes — call 808-300-9766.",
+    intro:
+      "Hawaiian Beaches sits in lower Puna below Pāhoa, just inland from the coast off Highway 130. Big gridded lots, cinder side roads, and a mix of long-time residents and newer builds — we work the area on most Puna runs.",
+    // TODO(JUSTIN): verify Hawaiian Shores, Pohoiki, and Kaimū references with Naea —
+    // they may be too far out to legitimately list under Hawaiian Beaches.
+    neighborhoods: ["Hawaiian Beaches", "Hawaiian Shores", "Kaimū-side", "Pāhoa-makai"],
+    landmarks: ["Highway 130 corridor", "Pohoiki / Isaac Hale Beach Park", "Kaimū black sand"],
+    roads: ["Highway 130", "Beach Road", "Kahakai Boulevard"],
+    routedTo: ["east-sort-station", "east-organics", "west-landfill"],
+    // TODO(JUSTIN): light-verify localNotes wording with Naea at review.
+    localNotes:
+      "Hawaiian Beaches is a Puna coastal subdivision below Pāhoa, accessed off Hwy 130 down toward the makai side. Large gridded one-acre lots on lava-zone terrain with cinder and gravel side roads, so we scout truck staging and turnaround before drop-off.",
+    responseTime: "Same-day or next-day",
+  },
+  {
     slug: "hawaiian-paradise-park",
     name: "Hawaiian Paradise Park",
     fullName: "Hawaiian Paradise Park (HPP), HI",
