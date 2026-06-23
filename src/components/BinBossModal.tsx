@@ -3,16 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 
-// ────────────────────────────────────────────────────────────────────
-// TODO(JUSTIN) — REPLACE BEFORE GOING LIVE.
-// The client's reference snippet had company_name=Pack_Mule_Dumpsters,
-// which is a Bin Boss template leftover, NOT Hawaii Island Waste.
-// Confirm HIW's real Bin Boss storefront slug with the client and
-// replace the placeholder below. Until this is updated, the modal will
-// open the wrong storefront.
-// ────────────────────────────────────────────────────────────────────
 const BINBOSS_URL =
-  "https://app.mybinboss.com/storefront/?company_name=Hawaii_Island_Waste"; // TODO(JUSTIN): confirm real HIW slug
+  "https://app.mybinboss.com/storefront/?company_name=Hawaii_Island_Waste";
 
 // Button text tokens that should open the modal. Match is case-insensitive
 // and whitespace-normalized.
