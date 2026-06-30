@@ -93,15 +93,7 @@ export default function ContactPage() {
           <div className="lg:col-span-7">
             <Card>
               <CardContent className="p-6 md:p-8">
-                <h2 className="font-display font-extrabold text-2xl text-(--color-ocean-800)">
-                  Get your free quote
-                </h2>
-                <p className="mt-1 text-(--color-ocean-700)/75">
-                  Tell us about your project and we'll reach out shortly.
-                </p>
-                <div className="mt-6">
-                  <QuoteCTA />
-                </div>
+                <QuoteCTA />
               </CardContent>
             </Card>
           </div>

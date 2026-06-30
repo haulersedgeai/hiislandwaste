@@ -173,15 +173,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <div className="sticky top-24 space-y-6">
               <Card>
                 <CardContent className="p-6">
-                  <h3 className="font-display font-bold text-lg text-(--color-ocean-800)">
-                    Get a free quote for this job
-                  </h3>
-                  <p className="mt-1 text-sm text-(--color-ocean-700)/75">
-                    Quick reply — Mon–Sun, 7am–8pm.
-                  </p>
-                  <div className="mt-4">
-                    <QuoteCTA compact />
-                  </div>
+                  <QuoteCTA compact />
                 </CardContent>
               </Card>
               {serviceTestimonials.map((t) => (

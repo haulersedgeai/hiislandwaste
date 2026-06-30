@@ -75,13 +75,7 @@ export default function HomePage() {
           <div className="lg:col-span-5">
             <Card className="bg-white/97 backdrop-blur shadow-xl">
               <CardContent className="p-6 md:p-7">
-                <h2 className="font-display font-bold text-xl text-(--color-ocean-800)">Get a free quote</h2>
-                <p className="mt-1 text-sm text-(--color-ocean-700)/75">
-                  Fast response. Mon–Sun, 7am–8pm. Or call <a href={`tel:${site.phoneE164}`} className="font-bold text-(--color-volcano-500)">{site.phone}</a>.
-                </p>
-                <div className="mt-5">
-                  <QuoteCTA compact />
-                </div>
+                <QuoteCTA compact />
               </CardContent>
             </Card>
           </div>

@@ -117,12 +117,7 @@ function RegionView({ region }: { region: Region }) {
             <div className="sticky top-24 space-y-6">
               <Card>
                 <CardContent className="p-6">
-                  <h3 className="font-display font-bold text-lg text-(--color-ocean-800)">
-                    Get a quote in {r.name}
-                  </h3>
-                  <div className="mt-4">
-                    <QuoteCTA compact />
-                  </div>
+                  <QuoteCTA compact />
                 </CardContent>
               </Card>
             </div>
@@ -278,15 +273,7 @@ function LocationView({ slug }: { slug: string }) {
             <div className="sticky top-24 space-y-6">
               <Card>
                 <CardContent className="p-6">
-                  <h3 className="font-display font-bold text-lg text-(--color-ocean-800)">
-                    Get a {loc.name} quote
-                  </h3>
-                  <p className="mt-1 text-sm text-(--color-ocean-700)/75">
-                    Tell us about your project — quick reply, no obligation.
-                  </p>
-                  <div className="mt-4">
-                    <QuoteCTA compact />
-                  </div>
+                  <QuoteCTA compact />
                 </CardContent>
               </Card>
               {locationTestimonials.map((t) => (

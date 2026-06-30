@@ -132,15 +132,7 @@ export default async function SegmentPage({ params }: { params: Promise<{ slug: 
             <div className="sticky top-24">
               <Card>
                 <CardContent className="p-6">
-                  <h3 className="font-display font-bold text-lg text-(--color-ocean-800)">
-                    Tell us about your project
-                  </h3>
-                  <p className="mt-1 text-sm text-(--color-ocean-700)/75">
-                    Quick reply — Mon–Sun, 7am–8pm.
-                  </p>
-                  <div className="mt-4">
-                    <QuoteCTA compact />
-                  </div>
+                  <QuoteCTA compact />
                 </CardContent>
               </Card>
             </div>
