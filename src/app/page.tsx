@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ArrowRight, Phone, Shield, Award, Heart, Clock, Truck, Sparkles, Star, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { QuoteForm } from "@/components/site/quote-form";
+import { QuoteCTA } from "@/components/site/quote-cta";
 import { CTASection, SectionHeading, ServiceCard, TestimonialCard, TrustBar, LocationCard } from "@/components/site/sections";
 import { serviceHubs } from "@/content/services";
 import { getFeaturedTestimonials, TOTAL_REVIEW_COUNT } from "@/content/testimonials";
@@ -80,7 +80,7 @@ export default function HomePage() {
                   Fast response. Mon–Sun, 7am–8pm. Or call <a href={`tel:${site.phoneE164}`} className="font-bold text-(--color-volcano-500)">{site.phone}</a>.
                 </p>
                 <div className="mt-5">
-                  <QuoteForm compact />
+                  <QuoteCTA compact />
                 </div>
               </CardContent>
             </Card>

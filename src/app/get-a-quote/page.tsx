@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Check, Phone, Clock } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { PageHero } from "@/components/site/sections";
-import { QuoteForm } from "@/components/site/quote-form";
+import { QuoteCTA } from "@/components/site/quote-cta";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -26,15 +26,13 @@ export default function GetAQuotePage() {
           <div className="lg:col-span-7">
             <Card>
               <CardContent className="p-6 md:p-8">
-                <h2 className="font-display font-extrabold text-2xl text-(--color-ocean-800)">
-                  Quote request
-                </h2>
-                <p className="mt-1 text-(--color-ocean-700)/75">
-                  We typically respond same-day during business hours.
+                <QuoteCTA />
+                <p className="mt-6 text-sm text-(--color-ocean-700)/80">
+                  Photo quotes work great for small jobs — just text a few pictures
+                  to <a href={`tel:${site.phoneE164}`} className="font-semibold text-(--color-volcano-500) hover:underline">{site.phone}</a> with the address and we'll get back to you fast.
+                  For estates, demolitions, or bigger jobs, we're happy to come walk the
+                  property in person. No obligation, ever.
                 </p>
-                <div className="mt-6">
-                  <QuoteForm />
-                </div>
               </CardContent>
             </Card>
           </div>

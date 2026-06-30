@@ -5,7 +5,7 @@ import { ArrowRight, Check, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { PageHero, CTASection, ServiceCard, TestimonialCard } from "@/components/site/sections";
-import { QuoteForm } from "@/components/site/quote-form";
+import { QuoteCTA } from "@/components/site/quote-cta";
 import { services, getService } from "@/content/services";
 import { getTestimonialsForService } from "@/content/testimonials";
 import { site } from "@/lib/site";
@@ -180,7 +180,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                     Quick reply — Mon–Sun, 7am–8pm.
                   </p>
                   <div className="mt-4">
-                    <QuoteForm compact defaultService={mapServiceDefault(service.title)} />
+                    <QuoteCTA compact />
                   </div>
                 </CardContent>
               </Card>

@@ -5,7 +5,7 @@ import { Check, Phone, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { PageHero, CTASection, ServiceCard, TestimonialCard } from "@/components/site/sections";
-import { QuoteForm } from "@/components/site/quote-form";
+import { QuoteCTA } from "@/components/site/quote-cta";
 import { customerSegments, getSegment } from "@/content/customer-segments";
 import { getService } from "@/content/services";
 import { getTestimonialsForSegment } from "@/content/testimonials";
@@ -139,7 +139,7 @@ export default async function SegmentPage({ params }: { params: Promise<{ slug: 
                     Quick reply — Mon–Sun, 7am–8pm.
                   </p>
                   <div className="mt-4">
-                    <QuoteForm compact />
+                    <QuoteCTA compact />
                   </div>
                 </CardContent>
               </Card>

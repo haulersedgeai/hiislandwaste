@@ -4,7 +4,7 @@ import { InstagramIcon } from "@/components/icons";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { PageHero, CTASection } from "@/components/site/sections";
-import { QuoteForm } from "@/components/site/quote-form";
+import { QuoteCTA } from "@/components/site/quote-cta";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -100,7 +100,7 @@ export default function ContactPage() {
                   Tell us about your project and we'll reach out shortly.
                 </p>
                 <div className="mt-6">
-                  <QuoteForm />
+                  <QuoteCTA />
                 </div>
               </CardContent>
             </Card>

@@ -5,7 +5,7 @@ import { ArrowRight, Phone, MapPin, Route, Landmark, Truck, Clock } from "lucide
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { PageHero, CTASection, LocationCard, ServiceCard, TestimonialCard } from "@/components/site/sections";
-import { QuoteForm } from "@/components/site/quote-form";
+import { QuoteCTA } from "@/components/site/quote-cta";
 import { locations, regions, getLocation, FACILITY_DETAILS, type Region, type Location } from "@/content/locations";
 import { serviceHubs } from "@/content/services";
 import { getTestimonialsForLocation } from "@/content/testimonials";
@@ -121,7 +121,7 @@ function RegionView({ region }: { region: Region }) {
                     Get a quote in {r.name}
                   </h3>
                   <div className="mt-4">
-                    <QuoteForm compact />
+                    <QuoteCTA compact />
                   </div>
                 </CardContent>
               </Card>
@@ -285,7 +285,7 @@ function LocationView({ slug }: { slug: string }) {
                     Tell us about your project — quick reply, no obligation.
                   </p>
                   <div className="mt-4">
-                    <QuoteForm compact defaultCity={mapLocationDefault(loc.slug)} />
+                    <QuoteCTA compact />
                   </div>
                 </CardContent>
               </Card>

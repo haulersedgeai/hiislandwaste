@@ -1,3 +1,4 @@
+// TEMP: parked — not invoked anywhere; restore when transactional email (Resend) is set up.
 "use server";
 
 import { Resend } from "resend";
