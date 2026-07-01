@@ -1,7 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
-import { submitQuote, type QuoteFormState } from "@/app/actions/quote";
+import { useState, type FormEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select } from "@/components/ui/select";
@@ -9,7 +8,10 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, AlertTriangle } from "lucide-react";
 
-const initialState: QuoteFormState = { status: "idle" };
+type FormState =
+  | { status: "idle" | "pending" }
+  | { status: "success"; message: string }
+  | { status: "error"; message: string };
 
 const CITY_OPTIONS = [
   "Hilo", "Kaumana", "Keaʻau", "Pāhoa", "Hawaiian Paradise Park", "Orchidland",
@@ -22,13 +24,18 @@ const CITY_OPTIONS = [
 ];
 
 const SERVICE_OPTIONS = [
-  "Residential Junk Removal", "Demolition", "Dumpster Rental", "Estate Cleanout",
-  "Furniture Removal", "Appliance Removal", "Mattress Removal", "TV / Electronics (E-Waste)",
-  "Hot Tub Removal", "Shed Demolition", "Deck Demolition", "Fence Removal",
-  "Interior Demolition", "Hoarder Cleanout", "Garage Cleanout", "Construction Debris",
-  "Yard / Green Waste", "Property Cleanout (Realtor)", "Commercial / Office",
-  "Other / Not Sure",
+  "Junk Removal",
+  "Dumpster Rental",
+  "Demolition",
+  "Estate / Property Cleanout",
+  "Commercial / Office",
+  "Other / Not sure",
 ];
+
+function sanitize(value: FormDataEntryValue | null, max = 500): string {
+  if (typeof value !== "string") return "";
+  return value.trim().slice(0, max);
+}
 
 export function QuoteForm({
   defaultService,
@@ -39,7 +46,80 @@ export function QuoteForm({
   defaultCity?: string;
   compact?: boolean;
 }) {
-  const [state, formAction, pending] = useActionState(submitQuote, initialState);
+  const [state, setState] = useState<FormState>({ status: "idle" });
+  const pending = state.status === "pending";
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    const honeypot = sanitize(data.get("company_url"));
+    if (honeypot) {
+      setState({ status: "success", message: "Thanks — we'll be in touch." });
+      return;
+    }
+
+    const name = sanitize(data.get("name"), 120);
+    const phone = sanitize(data.get("phone"), 40);
+    const email = sanitize(data.get("email"), 200);
+    const address = sanitize(data.get("address"), 240);
+    const city = sanitize(data.get("city"), 80);
+    const service = sanitize(data.get("service"), 80);
+    const description = sanitize(data.get("description"), 4000);
+    const preferredDate = sanitize(data.get("preferredDate"), 40);
+
+    if (!name || !phone || !description) {
+      setState({ status: "error", message: "Please share your name, phone, and a brief description so we can help." });
+      return;
+    }
+    if (!/^[\d().+\-\s]{7,}$/.test(phone)) {
+      setState({ status: "error", message: "That phone number doesn't look right — please double-check." });
+      return;
+    }
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setState({ status: "error", message: "That email doesn't look right — please double-check." });
+      return;
+    }
+
+    setState({ status: "pending" });
+
+    const payload = {
+      access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
+      subject: `New Quote Request — ${service} (${city}) — ${name}`,
+      from_name: "Hawaii Island Waste Quotes",
+      replyto: email || undefined,
+      name,
+      phone,
+      email: email || "—",
+      service: service || "Not specified",
+      city: city || "Not specified",
+      address: address || "—",
+      preferred_date: preferredDate || "Anytime / flexible",
+      message: description,
+    };
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      const result = (await res.json()) as { success?: boolean };
+      if (result.success === true) {
+        setState({ status: "success", message: "Mahalo — your request is in. We'll reach out shortly." });
+        form.reset();
+      } else {
+        setState({ status: "error", message: "We hit a snag sending your quote. Please call us at 808-300-9766 — we'd love to help right away." });
+      }
+    } catch (err) {
+      console.error("[quote] web3forms fetch error:", err);
+      setState({ status: "error", message: "We hit a snag sending your quote. Please call us at 808-300-9766 — we'd love to help right away." });
+    }
+  }
 
   if (state.status === "success") {
     return (
@@ -62,7 +142,7 @@ export function QuoteForm({
   }
 
   return (
-    <form action={formAction} className="space-y-5">
+    <form onSubmit={onSubmit} className="space-y-5">
       {/* Honeypot */}
       <input
         type="text"
