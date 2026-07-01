@@ -1,9 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Phone, Shield, Award, Heart, Clock, Truck, Sparkles, Star, MapPin } from "lucide-react";
+import { ArrowRight, Phone, MessageSquare, Shield, Award, Heart, Clock, Truck, Sparkles, Star, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { QuoteCTA } from "@/components/site/quote-cta";
 import { CTASection, SectionHeading, ServiceCard, TestimonialCard, TrustBar, LocationCard } from "@/components/site/sections";
 import { serviceHubs } from "@/content/services";
 import { getFeaturedTestimonials, TOTAL_REVIEW_COUNT } from "@/content/testimonials";
@@ -75,7 +74,47 @@ export default function HomePage() {
           <div className="lg:col-span-5">
             <Card className="bg-white/97 backdrop-blur shadow-xl">
               <CardContent className="p-6 md:p-7">
-                <QuoteCTA compact />
+                <div className="space-y-5">
+                  <div>
+                    <h2 className="font-display font-extrabold text-2xl text-(--color-ocean-800)">
+                      Get a Fast, Free Quote
+                    </h2>
+                    <p className="mt-1.5 text-(--color-ocean-700)/80">
+                      Tell us about your project — we usually respond same day, Mon–Sun 7am–8pm.
+                    </p>
+                  </div>
+
+                  <Button asChild size="xl" className="w-full">
+                    <Link href="/get-a-quote">
+                      Get a Free Quote <ArrowRight className="size-4" />
+                    </Link>
+                  </Button>
+
+                  <Link
+                    href="/reviews"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold text-(--color-ocean-800) hover:text-(--color-volcano-500) transition-colors"
+                  >
+                    <Star className="size-4 fill-(--color-volcano-500) text-(--color-volcano-500)" />
+                    5.0 · {TOTAL_REVIEW_COUNT} reviews on Google & Yelp
+                  </Link>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <Button asChild size="lg" variant="outline">
+                      <a href={`tel:${site.phoneE164}`}>
+                        <Phone className="size-4" /> Call
+                      </a>
+                    </Button>
+                    <Button asChild size="lg" variant="outline">
+                      <a href={`sms:${site.sms}`}>
+                        <MessageSquare className="size-4" /> Text
+                      </a>
+                    </Button>
+                  </div>
+
+                  <p className="text-xs text-(--color-ocean-700)/60">
+                    Text us photos for the fastest quote — <a href={`tel:${site.phoneE164}`} className="font-semibold text-(--color-volcano-500) hover:underline">{site.phone}</a>.
+                  </p>
+                </div>
               </CardContent>
             </Card>
           </div>
