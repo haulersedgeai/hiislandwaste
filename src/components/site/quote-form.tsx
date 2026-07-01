@@ -1,4 +1,3 @@
-// TEMP: parked — not rendered anywhere; restore when transactional email (Resend) is set up.
 "use client";
 
 import { useActionState } from "react";

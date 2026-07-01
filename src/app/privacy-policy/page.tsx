@@ -42,7 +42,7 @@ export default function PrivacyPage() {
 
           <h2 className="font-display font-extrabold text-2xl text-(--color-ocean-800) mt-6">How we store it</h2>
           <p>
-            Quote submissions are sent by email through our email-delivery provider (Resend) and stored in our standard business email. We retain them only as long as needed to serve you and meet basic business record-keeping requirements.
+            Quote submissions are processed by our form-submission provider (Web3Forms, which delivers via AWS) and stored in our standard business email. We retain them only as long as needed to serve you and meet basic business record-keeping requirements.
           </p>
 
           <h2 className="font-display font-extrabold text-2xl text-(--color-ocean-800) mt-6">Cookies</h2>

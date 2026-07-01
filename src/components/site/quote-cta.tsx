@@ -1,5 +1,4 @@
-import { Phone, MessageSquare } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { QuoteForm } from "@/components/site/quote-form";
 import { site } from "@/lib/site";
 
 export function QuoteCTA({ compact = false }: { compact?: boolean }) {
@@ -14,25 +13,14 @@ export function QuoteCTA({ compact = false }: { compact?: boolean }) {
           Get a Fast, Free Quote
         </h3>
         <p className="mt-1.5 text-(--color-ocean-700)/80">
-          Call or text us — we usually respond same day, Mon–Sun 7am–8pm.
+          Tell us about your project — we usually respond same day, Mon–Sun 7am–8pm.
         </p>
       </div>
 
-      <div className={`grid gap-3 ${compact ? "sm:grid-cols-2" : "sm:grid-cols-2"}`}>
-        <Button asChild size="lg">
-          <a href={`tel:${site.phoneE164}`}>
-            <Phone className="size-4" /> Call {site.phone}
-          </a>
-        </Button>
-        <Button asChild size="lg" variant="outline">
-          <a href={`sms:${site.sms}`}>
-            <MessageSquare className="size-4" /> Text {site.phone}
-          </a>
-        </Button>
-      </div>
+      <QuoteForm compact={compact} />
 
       <p className="text-xs text-(--color-ocean-700)/60">
-        Have photos? Text them along — fastest way to get a quote.
+        Prefer to <a href={`tel:${site.phoneE164}`} className="font-semibold text-(--color-volcano-500) hover:underline">call</a> or <a href={`sms:${site.sms}`} className="font-semibold text-(--color-volcano-500) hover:underline">text</a>? Text us photos for the fastest quote.
       </p>
     </div>
   );
